@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SEO from '../components/SEO';
+import Navbar from '../components/Navbar';
 import axios from 'axios';
 import smileImg from '../images/smile design after.png';
 import alignersImg from '../images/braces and aligners after.png';
@@ -112,6 +114,11 @@ const Home = () => {
 
   return (
     <div className="pt-20">
+      <SEO 
+        title="World-Class Dentistry in Bengaluru"
+        description="Auro V Dental offers advanced digital smile designing, clear aligners, and dental implants with international standards. Book your free consultation today."
+        keywords="best dentist Bengaluru, digital smile design, clear aligners India, dental implants Bengaluru, Auro V Dental"
+      />
       {/* Hero Section */}
       <header className="relative min-h-[90vh] flex items-center px-6 md:px-20 overflow-hidden bg-[color:var(--deep)]">
         <img 

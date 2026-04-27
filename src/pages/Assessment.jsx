@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { Link } from 'react-router-dom';
 
 const AssessmentPage = () => {
   const { t } = useLanguage();
@@ -60,6 +62,11 @@ const AssessmentPage = () => {
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 bg-gradient-to-b from-[color:var(--soft)] to-white">
+      <SEO 
+        title="Free Smile Assessment" 
+        description="Take our 1-minute smile assessment quiz to get a personalized dental treatment recommendation and cost estimate. Free for all patients."
+        keywords="smile quiz, dental assessment, free dental advice, smile makeover quiz, Auro V Dental"
+      />
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-serif font-bold text-[color:var(--dk)] mb-4">

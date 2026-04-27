@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
+import SEO from '../components/SEO';
+
 const FAQPage = () => {
   const { t } = useLanguage();
   const [faqs, setFaqs] = useState([]);
@@ -49,6 +51,11 @@ const FAQPage = () => {
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 bg-gradient-to-b from-[color:var(--soft)] to-white">
+      <SEO 
+        title="Frequently Asked Questions" 
+        description="Find answers to common dental questions about implants, aligners, and smile makeovers. Get all the information you need before your visit."
+        keywords="dental FAQ, dentist questions, aligner costs, implant safety, Auro V Dental help"
+      />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

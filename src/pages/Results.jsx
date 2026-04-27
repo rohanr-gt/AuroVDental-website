@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
+import SEO from '../components/SEO';
+
 const API_BASE = '';
 
 function resolveMediaUrl(url) {
@@ -66,6 +68,11 @@ const ResultsPage = () => {
 
   return (
     <div className="min-h-screen pt-24 bg-[color:var(--bg)] text-[color:var(--txt)]">
+      <SEO 
+        title="Patient Transformations & Gallery" 
+        description="See the real-life transformations of our patients at Auro V Dental. Before and after results for smile designing, aligners, and dental implants."
+        keywords="dental before and after, smile transformation gallery, aligners results, implants success stories"
+      />
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
       {/* Header */}
       <div className="mb-16">

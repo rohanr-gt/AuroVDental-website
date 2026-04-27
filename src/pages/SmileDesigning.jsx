@@ -5,6 +5,8 @@ import smileDesignBefore from '../images/smile design before.png';
 import smileDesignAfter from '../images/smile design after.png';
 import smileDesignBg from '../images/smile desighning background.png';
 
+import SEO from '../components/SEO';
+
 const SmileDesigning = () => {
   const { t } = useLanguage();
   const data = {
@@ -25,7 +27,16 @@ const SmileDesigning = () => {
     afterImg: "https://parthadental.com/wp-content/uploads/2022/09/cosmetic-dentistry-750x750.jpg"
   };
 
-  return <ServicePage {...data} />;
+  return (
+    <>
+      <SEO 
+        title="Digital Smile Designing" 
+        description="Transform your smile with Digital Smile Designing (DSD). Preview your perfect smile with 3D planning and expert aesthetic dentistry."
+        keywords="smile design, aesthetic dentistry, veneers, cosmetic dentist Bengaluru, DSD"
+      />
+      <ServicePage {...data} />
+    </>
+  );
 };
 
 export default SmileDesigning;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
 
 const BookingPage = () => {
   const { t } = useLanguage();
@@ -63,6 +64,11 @@ const BookingPage = () => {
 
   return (
     <div className="min-h-screen pt-24 md:pt-32 pb-20 px-4 bg-gradient-to-b from-[color:var(--soft)] to-white">
+      <SEO 
+        title="Book Appointment" 
+        description="Schedule your free dental consultation at Auro V Dental. Book online for smile designing, aligners, or implants in Bengaluru."
+        keywords="book dentist online, dental appointment Bengaluru, free consultation, Auro V Dental booking"
+      />
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8 md:mb-12">
           <h1 className="text-3xl md:text-5xl font-serif font-bold text-[color:var(--dk)] mb-4">{t('booking.title')}</h1>

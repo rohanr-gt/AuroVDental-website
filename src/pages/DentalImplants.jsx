@@ -5,6 +5,8 @@ import implantsBefore from '../images/dental implant before.png';
 import implantsAfter from '../images/dental implant after.png';
 import implantsBg from '../images/dental implant background.jpg';
 
+import SEO from '../components/SEO';
+
 const DentalImplants = () => {
   const { t } = useLanguage();
   const data = {
@@ -25,7 +27,16 @@ const DentalImplants = () => {
     afterImg: "https://www.sanmarcosdental.com/blog/wp-content/uploads/implant-diagram.jpeg"
   };
 
-  return <ServicePage {...data} />;
+  return (
+    <>
+      <SEO 
+        title="Dental Implants" 
+        description="Replace missing teeth with permanent, bio-compatible dental implants. High-precision placement for a natural look and lifelong function."
+        keywords="dental implants Bengaluru, titanium implants, tooth replacement, implantology, Auro V Dental"
+      />
+      <ServicePage {...data} />
+    </>
+  );
 };
 
 export default DentalImplants;

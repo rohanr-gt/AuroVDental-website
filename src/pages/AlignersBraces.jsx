@@ -5,6 +5,8 @@ import alignersBefore from '../images/braces and aligners before.png';
 import alignersAfter from '../images/braces and aligners after.png';
 import alignersBg from '../images/braces and aligners background.jpg';
 
+import SEO from '../components/SEO';
+
 const AlignersBraces = () => {
   const { t } = useLanguage();
   const data = {
@@ -25,7 +27,16 @@ const AlignersBraces = () => {
     afterImg: "https://dentistry.uic.edu/wp-content/uploads/sites/741/2020/10/iStock-501427146-1090x595.jpg"
   };
 
-  return <ServicePage {...data} />;
+  return (
+    <>
+      <SEO 
+        title="Clear Aligners & Braces" 
+        description="Get a straighter smile with invisible aligners and advanced braces. Discreet orthodontic solutions for adults and children in Bengaluru."
+        keywords="clear aligners, Invisalign alternative, metal braces, orthodontist Bengaluru, straight teeth"
+      />
+      <ServicePage {...data} />
+    </>
+  );
 };
 
 export default AlignersBraces;
