@@ -19,7 +19,7 @@ const translations = {
       bookNow: 'Book Now',
       logout: 'Logout',
       welcome: 'Welcome',
-      ourWork: 'Our Work'
+      ourWork: 'Our Works'
     },
     home: {
       heroTitle: 'Where Perfect Smiles Are Crafted',
@@ -351,7 +351,7 @@ const translations = {
       bookNow: 'Reservar Ahora',
       logout: 'Cerrar Sesión',
       welcome: 'Bienvenido',
-      ourWork: 'Nuestro Trabajo'
+      ourWork: 'Nuestros Trabajos'
     },
     home: {
       heroTitle: 'Donde Se Crean Sonrisas Perfectas',

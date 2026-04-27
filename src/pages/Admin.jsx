@@ -327,7 +327,7 @@ export default function Admin() {
                     <option value="smile-designing">Smile Designing</option>
                     <option value="aligners">Braces & Aligners</option>
                     <option value="implants">Dental Implants</option>
-                    <option value="our-work">Our Work</option>
+                    <option value="our-work">Our Works</option>
                   </select>
                 </div>
 
