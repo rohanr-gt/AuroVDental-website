@@ -12,6 +12,7 @@ function FloatingWhatsApp() {
       rel="noopener noreferrer"
       className="fixed bottom-24 right-6 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition-all hover:scale-110 z-40"
       title="Chat on WhatsApp"
+      aria-label="Chat on WhatsApp"
     >
       <svg
         className="w-6 h-6"

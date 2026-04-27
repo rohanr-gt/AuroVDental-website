@@ -178,6 +178,7 @@ const Chatbot = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="rounded-full p-4 shadow-lg transition-all hover:scale-110 flex items-center justify-center w-16 h-16 border border-white/10 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 text-white shadow-[0_10px_30px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,255,255,0.06)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.38),0_0_0_1px_rgba(34,211,238,0.25)]"
         title={isOpen ? 'Close assistant' : 'Open assistant'}
+        aria-label={isOpen ? 'Close assistant' : 'Open assistant'}
       >
         {isOpen ? (
           <span className="text-xl leading-none">✕</span>
