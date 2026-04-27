@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Dental Services — SmileVista Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#3E7A52;--dk:#2F5D3A;--deep:#1E3D26;--white:#fff;--bg:#F8F7F4;--soft:#EFF4F0;--footer:#1E3D26;--card-dk:#2A5234;--accent:#6B8F71;--mint:#C9A24A;--txt:#1F2937;--muted:#6B7280;--hover:#2F5D3A;--cta-gold:#C9A24A;--cta-hover:#B88E3B}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--txt);background:var(--white);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:4px;}
+
+/* UTILS */
+.btn-cta{background:var(--cta-gold);color:#fff;border:none;padding:14px 30px;border-radius:10px;font:.95rem/1 'DM Sans',sans-serif;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s ease;box-shadow:0 5px 20px rgba(201,162,74,0.3);position:relative;overflow:hidden}
+.btn-cta:hover{background:var(--cta-hover);transform:translateY(-3px)}
+
+.lbl{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.lbl::before{content:'';display:block;width:24px;height:2px;background:var(--teal)}
+.ttl{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:600;color:var(--dk);margin-bottom:18px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:80px;background:rgba(255,255,255,.98);backdrop-filter:blur(15px);border-bottom:1px solid rgba(62,122,82,.08)}
+.nlogo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nlogo-i{width:42px;height:42px;background:var(--teal);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{text-decoration:none;font-size:.9rem;font-weight:500;color:var(--txt);transition:.2s}
+.nlinks a:hover{color:var(--teal)}
+
+/* DROPDOWN */
+.ndrop{position:relative}
+.nd-menu{position:absolute;top:100%;left:0;background:#fff;min-width:200px;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.1);padding:10px 0;opacity:0;visibility:hidden;transform:translateY(10px);transition:all .3s ease;border:1px solid rgba(62,122,82,.08)}
+.ndrop:hover .nd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nd-menu a{display:block;padding:12px 25px;font-size:.85rem;font-weight:500;color:var(--txt);transition:.2s}
+.nd-menu a:hover{background:var(--soft);color:var(--teal)}
+.nh::after{content:'▾';font-size:.7rem;margin-left:5px;opacity:0.6}
+
+/* HERO */
+.s-hero{padding:180px 5% 100px;background:var(--bg);text-align:center}
+.s-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,4.5rem);margin-bottom:20px;line-height:1.1;color:var(--dk)}
+
+/* CARDS GRID */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:30px;padding:80px 5%}
+.scard{position:relative;height:480px;border-radius:24px;overflow:hidden;background:var(--dk);cursor:pointer;transition:0.4s}
+.scard:hover{transform:translateY(-10px)}
+.scimg{height:100%;width:100%;opacity:0.65;transition:0.4s;object-fit:cover}
+.scard:hover .scimg{transform:scale(1.08);opacity:0.4}
+.scov{position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(transparent, rgba(30,61,38,0.95))}
+.sccon{position:absolute;bottom:0;left:0;right:0;padding:40px;color:#fff}
+.scico{font-size:2rem;margin-bottom:15px}
+.scn {font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;margin-bottom:10px}
+.scd{font-size:.9rem;line-height:1.6;opacity:0.9;margin-bottom:20px}
+.scl{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--mint)}
+
+/* FOOTER */
+footer{background:var(--footer);color:#fff;padding:80px 5% 40px;text-align:center}
+
+@media(max-width:968px){ .nlinks{display:none} .services-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nlogo">
+    <div class="nlogo-i"><svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M12 2C7.5 2 4 5.5 4 10c0 2.5 1.1 4.7 2.9 6.2L8 21h8l1.1-4.8C18.9 14.7 20 12.5 20 10c0-4.5-3.5-8-8-8zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/></svg></div>
+    <span style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:var(--dk)">SmileVista</span>
+  </a>
+  <ul class="nlinks">
+    <li><a href="index.html">Home</a></li>
+    <li class="ndrop">
+      <a href="services.html" class="nh" style="color:var(--teal)">Services</a>
+      <div class="nd-menu">
+        <a href="smile-designing.html">Smile Designing</a>
+        <a href="aligners.html">Aligners & Braces</a>
+        <a href="implants.html">Dental Implants</a>
+      </div>
+    </li>
+    <li><a href="results.html">Results</a></li>
+    <li><a href="index.html#appointment">Contact</a></li>
+  </ul>
+  <a href="index.html#appointment" class="btn-cta">Book Consultation</a>
+</nav>
+
+<header class="s-hero">
+  <div class="lbl">Advanced Dentistry</div>
+  <h1>Our <em>Patient-First</em> Services</h1>
+  <p style="max-width:700px; margin:20px auto 0; color:var(--muted); font-size:1.1rem">Explore our comprehensive range of specialized dental treatments designed to restore, enhance, and protect your perfect smile.</p>
+</header>
+
+<section class="services-grid">
+  <div class="scard" onclick="location.href='smile-designing.html'">
+    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&q=85" class="scimg" alt="Smile Designing">
+    <div class="scov"></div>
+    <div class="sccon"><div class="scico">✨</div><div class="scn">Smile Designing</div><div class="scd">Digitally planned smile makeovers for perfect proportions and facial harmony.</div><div class="scl">Detailed Journey →</div></div>
+  </div>
+  
+  <div class="scard" onclick="location.href='implants.html'">
+    <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=900&q=85" class="scimg" alt="Dental Implants">
+    <div class="scov"></div>
+    <div class="sccon"><div class="scico">🦷</div><div class="scn">Dental Implants</div><div class="scd">Permanent, biological replacements for missing teeth using Swiss-tier precision.</div><div class="scl">Restoration Details →</div></div>
+  </div>
+  
+  <div class="scard" onclick="location.href='aligners.html'">
+    <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=900&q=85" class="scimg" alt="Clear Aligners">
+    <div class="scov"></div>
+    <div class="sccon"><div class="scico">🔮</div><div class="scn">Aligners & Braces</div><div class="scd">Invisible orthodontic correction to straighten your teeth without the metal wires.</div><div class="scl">Alignment Journey →</div></div>
+  </div>
+
+  <div class="scard">
+    <img src="https://images.unsplash.com/photo-1603685000700-2e83bd4c64db?w=900&q=85" class="scimg" alt="Cosmetic Dentistry">
+    <div class="scov"></div>
+    <div class="sccon"><div class="scico">💎</div><div class="scn">Cosmetic Veneers</div><div class="scd">Ultra-thin porcelain laminates to correct chips, gaps, and stains instantly.</div><div class="scl">View Procedure →</div></div>
+  </div>
+
+  <div class="scard">
+    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=900&q=85" class="scimg" alt="Laser Dentistry">
+    <div class="scov"></div>
+    <div class="sccon"><div class="scico">⚡</div><div class="scn">Laser Therapy</div><div class="scd">Painless gum contouring and infection treatment using advanced biolase systems.</div><div class="scl">View Procedure →</div></div>
+  </div>
+
+  <div class="scard">
+    <img src="https://images.unsplash.com/photo-1579684385102-f35b2e31e5f0?w=900&q=85" class="scimg" alt="Full Mouth Rehab">
+    <div class="scov"></div>
+    <div class="sccon"><div class="scico">🏥</div><div class="scn">Full Mouth Rehab</div><div class="scd">Comprehensive rebuilding of the entire dentition for health and function.</div><div class="scl">View Procedure →</div></div>
+  </div>
+</section>
+
+<section style="padding:100px 5%; text-align:center; background:var(--bg)">
+  <h2 class="ttl">Ready for Your <em>Personalized Plan?</em></h2>
+  <p style="opacity:0.8; margin-bottom:40px">Book your initial consultation and discover the best path for your dental health.</p>
+  <a href="index.html#appointment" class="btn-cta">Start My Smile Assessment</a>
+</section>
+
+<footer>
+  <p>© 2026 SmileVista Dental. Premium Care, Worldwide Trust.</p>
+</footer>
+
+</body>
+</html>

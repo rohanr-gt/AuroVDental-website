@@ -1,0 +1,40 @@
+{
+  "name": "smilevista-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles/index.css -o ./dist/index.css",
+    "build:js": "node scripts/build.mjs",
+    "build": "npm run build:css && npm run build:js",
+    "dev": "npm run build && node server/server.js",
+    "start": "node server/server.js",
+    "start:build": "npm run build && node server/server.js",
+    "postinstall": "node scripts/init-env.mjs && npm run build",
+    "setup:email": "node scripts/setup-email.mjs"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.1.1",
+    "mysql2": "^3.6.1",
+    "nodemailer": "^7.0.5",
+    "node-cron": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "autoprefixer": "^10.4.14",
+    "esbuild": "^0.19.2",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
+  }
+}

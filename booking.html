@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Dashboard — SmileVista Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--teal:#3E7A52;--dk:#2F5D3A;--deep:#1E3D26;--white:#fff;--bg:#F8F7F4;--soft:#EFF4F0;--footer:#1E3D26;--card-dk:#2A5234;--accent:#6B8F71;--mint:#C9A24A;--txt:#1F2937;--muted:#6B7280;--hover:#2F5D3A;--cta-gold:#C9A24A;--cta-hover:#B88E3B}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--txt);background:var(--bg);height:100vh;overflow:hidden;display:flex}
+
+.sidebar{width:280px;background:var(--deep);color:#fff;padding:40px 0;display:flex;flex-direction:column}
+.logo{padding:0 30px;font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;text-decoration:none;color:#fff;margin-bottom:60px}
+.logo span{color:var(--mint)}
+.s-links{list-style:none;flex:1}
+.s-link{padding:15px 30px;display:flex;align-items:center;gap:15px;color:rgba(255,255,255,0.7);text-decoration:none;transition:0.3s;font-size:.9rem;cursor:pointer}
+.s-link:hover, .s-link.active{background:rgba(255,255,255,0.05);color:#fff}
+
+.main{flex:1;padding:40px 5%;overflow-y:auto}
+.dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+
+.slider-thumb::-webkit-slider-thumb { -webkit-appearance: none; width: 4px; height: 800px; background: white; cursor: ew-resize; box-shadow: 0 0 15px rgba(0,0,0,0.4); }
+.s-hide{display:none !important}
+
+@keyframes progressRun { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.animate-progress { animation: progressRun 1.5s infinite linear; }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="index.html" class="logo">Smile<span>Vista</span></a>
+  <ul class="s-links">
+    <li class="s-link active" id="tab-dash" onclick="openTab('dash')">Dashboard</li>
+    <li class="s-link" id="tab-book" onclick="openTab('book')">Book Appointment</li>
+    <li class="s-link" id="tab-ai" onclick="openTab('ai')">AI Smile Preview</li>
+    <li class="s-link">My Plans</li>
+    <li class="s-link">Clinic Billing</li>
+  </ul>
+  <a href="#" onclick="logout()" class="s-link" style="margin-top:auto">Sign Out</a>
+</aside>
+
+<main class="main">
+  <div class="dash-head">
+    <div class="greet">
+      <h1 id="greetTitle">Welcome back, Sarah!</h1>
+      <p style="color:var(--muted)" id="greetSub">Manage your oral health and explore aesthetic transformations.</p>
+    </div>
+  </div>
+
+  <!-- BOOKING TAB -->
+  <div id="bookTab" class="s-hide">
+     <div class="bg-white rounded-[32px] p-12 shadow-xl max-w-4xl mx-auto">
+       <h2 style="font-family:'Cormorant Garamond',serif; font-size:2.2rem; margin-bottom:30px">Secure Your Slot</h2>
+       <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px">
+          <div>
+            <h4 style="font-size:.8rem; text-transform:uppercase; color:var(--teal); margin-bottom:15px; font-weight:700">1. Choose Treatment</h4>
+            <div style="padding:18px; border:1.5px solid #eee; border-radius:14px; margin-bottom:12px; cursor:pointer" onclick="this.style.borderColor='var(--teal)'">Smile Enhancement</div>
+            <div style="padding:18px; border:1.5px solid #eee; border-radius:14px; margin-bottom:12px; cursor:pointer" onclick="this.style.borderColor='var(--teal)'">General Orthodontics</div>
+            <div style="padding:18px; border:1.5px solid #eee; border-radius:14px; margin-bottom:12px; cursor:pointer" onclick="this.style.borderColor='var(--teal)'">Emergency Care</div>
+          </div>
+          <div>
+            <h4 style="font-size:.8rem; text-transform:uppercase; color:var(--teal); margin-bottom:15px; font-weight:700">2. Preferences</h4>
+            <input type="date" style="width:100%; padding:18px; border-radius:14px; border:1.5px solid #eee; margin-bottom:20px; outline:none">
+            <button onclick="finish()" style="width:100%; background:var(--teal); color:#fff; padding:20px; border-radius:14px; border:none; font-weight:600; cursor:pointer">Confirm Appointment Reservation</button>
+          </div>
+       </div>
+     </div>
+  </div>
+
+  <!-- AI SECTION (REACT MOUNT) -->
+  <div id="aiTab" class="s-hide">
+    <div id="react-ai-root"></div>
+  </div>
+
+  <div id="savedGallery" style="margin-top:60px">
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; margin-bottom:20px">My Saved Previews</h3>
+    <div id="gallery" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px">
+       <p style="color:var(--muted); font-size:.9rem">No saved previews yet. Generate your first one above!</p>
+    </div>
+  </div>
+</main>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const SmileAI = () => {
+  const [originalImg, setOriginalImg] = useState(null);
+  const [processedImg, setProcessedImg] = useState(null);
+  const [status, setStatus] = useState('idle'); // idle, loading, result
+  const [progress, setProgress] = useState(0);
+  const [log, setLog] = useState('');
+  const [slider, setSlider] = useState(50);
+  const canvasRef = useRef(null);
+
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        setOriginalImg(ev.target.result);
+        processImage(ev.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const processImage = (dataUrl) => {
+    setStatus('loading');
+    setProgress(0);
+    setLog("Initializing AI Engine...");
+
+    // Mock AI API Call with status updates
+    const runMockAI = async () => {
+      const steps = [
+        { p: 20, m: "Detecting Facial Structure..." },
+        { p: 40, m: "Locating Smile Landmarks..." },
+        { p: 60, m: "Analyzing Enamel Shade..." },
+        { p: 80, m: "Applying Porcelain Whitening..." },
+        { p: 100, m: "Synthesizing Final Render..." }
+      ];
+
+      for (let s of steps) {
+        setLog(s.m);
+        setProgress(s.p);
+        await new Promise(r => setTimeout(r, 800));
+      }
+
+      // Use Canvas to process image as requested
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        
+        // Draw Original
+        ctx.drawImage(img, 0, 0);
+        
+        // Apply "Whitening" Pixel Logic (Simulated by drawing a bright light overlay)
+        ctx.globalCompositeOperation = 'soft-light';
+        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        
+        // Target central area (mouth simulation)
+        const mouthW = canvas.width * 0.3;
+        const mouthH = canvas.height * 0.15;
+        const mouthX = (canvas.width - mouthW) / 2;
+        const mouthY = canvas.height * 0.55;
+        
+        // Draw a soft whitening ellipse
+        ctx.beginPath();
+        ctx.ellipse(mouthX + mouthW/2, mouthY + mouthH/2, mouthW/2, mouthH/2, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Global enhancement
+        ctx.globalCompositeOperation = 'overlay';
+        ctx.fillStyle = 'white';
+        ctx.globalAlpha = 0.1;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        setProcessedImg(canvas.toDataURL('image/jpeg', 0.9));
+        setStatus('result');
+      };
+      img.src = dataUrl;
+    };
+
+    runMockAI();
+  };
+
+  const reset = () => {
+    setOriginalImg(null);
+    setProcessedImg(null);
+    setStatus('idle');
+    setSlider(50);
+  };
+
+  if (status === 'idle') {
+    return (
+      <div className="bg-white rounded-[32px] p-16 shadow-2xl max-w-4xl mx-auto text-center border-2 border-dashed border-emerald-50 hover:border-[#3E7A52] transition-all cursor-pointer group" onClick={() => document.getElementById('rIn').click()}>
+        <div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform text-4xl">📸</div>
+        <h2 className="text-3xl font-bold text-[#1E3D26] mb-4">AI Smile Simulation</h2>
+        <p className="text-gray-400 mb-10 max-w-sm mx-auto">Upload a clear patient photo to generate a high-fidelity smile transformation preview.</p>
+        <button className="bg-[#3E7A52] text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-xl shadow-emerald-900/20 hover:bg-[#2F5D3A] transition-all">Start Scan</button>
+        <input type="file" id="rIn" className="hidden" accept="image/*" onChange={handleUpload} />
+      </div>
+    );
+  }
+
+  if (status === 'loading') {
+    return (
+      <div className="bg-white rounded-[32px] p-24 shadow-2xl max-w-4xl mx-auto text-center">
+        <div className="relative w-40 h-40 mx-auto mb-12">
+          <div className="absolute inset-0 border-4 border-emerald-50 rounded-full"></div>
+          <div className="absolute inset-0 border-4 border-t-[#3E7A52] rounded-full animate-spin"></div>
+          <div className="absolute inset-0 flex items-center justify-center text-5xl">🦷</div>
+        </div>
+        <h3 className="text-2xl font-bold text-[#1E3D26] mb-4 tracking-tight">{log}</h3>
+        <div className="w-full max-w-md mx-auto h-3 bg-gray-100 rounded-full overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#3E7A52] to-[#C9A24A] transition-all duration-700" style={{width: `${progress}%`}}></div>
+          <div className="absolute inset-0 bg-white/20 animate-progress"></div>
+        </div>
+        <p className="mt-8 text-sm text-gray-400 font-medium">Using Clinical-Grade Neural Processing</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-[32px] p-10 md:p-14 shadow-2xl max-w-6xl mx-auto animate-fade-in">
+       <div className="relative aspect-[16/9] rounded-3xl overflow-hidden bg-black group shadow-emerald-900/10 shadow-2xl ring-8 ring-white">
+          {/* Base Layer: Original */}
+          <img src={originalImg} className="absolute inset-0 w-full h-full object-cover" alt="Original" />
+          
+          {/* Overlay Layer: Processed */}
+          <div className="absolute inset-0 w-full h-full" style={{ clipPath: `inset(0 ${100 - slider}% 0 0)` }}>
+             <img src={processedImg} className="w-full h-full object-cover" alt="AI Enhanced" />
+             <div className="absolute top-8 left-8 bg-[#C9A24A] text-white text-[11px] uppercase font-black tracking-widest px-6 py-2 rounded-full shadow-2xl border-2 border-white/20 backdrop-blur-sm">PROPOSED SMILE DESIGN</div>
+          </div>
+
+          {/* Interactive UI Highlights */}
+          <div className="absolute bottom-8 left-8 text-white text-[11px] font-black uppercase tracking-widest bg-black/50 backdrop-blur-md px-6 py-2.5 rounded-xl border border-white/10">Pre-Treatment</div>
+          <div className="absolute bottom-8 right-8 text-white text-[11px] font-black uppercase tracking-widest bg-[#3E7A52]/90 backdrop-blur-md px-6 py-2.5 rounded-xl border border-white/10">Simulation View</div>
+
+          {/* Slider Handle Implementation */}
+          <input type="range" min="0" max="100" value={slider} onChange={(e) => setSlider(e.target.value)} className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer z-50 slider-thumb" />
+       </div>
+
+       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 mb-16 px-4">
+          <div className="bg-[#F8F7F4] p-10 rounded-[28px] text-center border border-gray-100 transition-hover hover:border-[#3E7A52]">
+             <div className="text-[11px] text-gray-400 uppercase font-black tracking-widest mb-3">AI Prediction Score</div>
+             <div className="text-4xl font-bold text-[#3E7A52]">99.2%</div>
+          </div>
+          <div className="bg-[#F8F7F4] p-10 rounded-[28px] text-center border border-gray-100 transition-hover hover:border-[#C9A24A]">
+             <div className="text-[11px] text-gray-400 uppercase font-black tracking-widest mb-3">Esthetic Balance</div>
+             <div className="text-4xl font-bold text-[#C9A24A]">Superior</div>
+          </div>
+          <div className="bg-[#F8F7F4] p-10 rounded-[28px] text-center border border-gray-100 transition-hover hover:border-[#3E7A52]">
+             <div className="text-[11px] text-gray-400 uppercase font-black tracking-widest mb-3">Workflow Choice</div>
+             <div className="text-xl font-bold text-[#1E3D26] mt-2 underline decoration-[#3E7A52]">Digital Rehab</div>
+          </div>
+       </div>
+
+       <div className="flex flex-col lg:flex-row gap-6 px-4">
+          <button className="flex-[2] bg-[#3E7A52] text-white py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#2F5D3A] transition-all flex items-center justify-center gap-4 shadow-xl shadow-emerald-900/10">
+             <span className="text-xl">📤</span> Send to Doctor via WhatsApp
+          </button>
+          <button className="flex-1 bg-white border-2 border-gray-100 text-[#1E3D26] py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:border-[#3E7A52] transition-all" onClick={reset}>
+             New Case
+          </button>
+          <button className="flex-1 bg-[#C9A24A] text-white py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#B88E3B] transition-all shadow-xl shadow-amber-900/10" onClick={() => window.location.href='index.html#appointment'}>
+             Book Slot
+          </button>
+       </div>
+       
+       <p className="text-center text-[10px] text-gray-300 font-bold uppercase mt-12 tracking-widest">Experimental Clinical Simulation System v4.2</p>
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('react-ai-root'));
+root.render(<SmileAI />);
+</script>
+
+<script>
+const name = localStorage.getItem('user_name') || 'Sarah Johnson';
+document.getElementById('greetTitle').innerText = `Welcome back, ${name}!`;
+
+const urlParams = new URLSearchParams(window.location.search);
+if(urlParams.get('tab')){
+  openTab(urlParams.get('tab'));
+}
+
+function openTab(tab){
+  document.getElementById('bookTab').classList.add('s-hide');
+  document.getElementById('aiTab').classList.add('s-hide');
+  document.querySelectorAll('.s-link').forEach(l => l.classList.remove('active'));
+  
+  if(tab === 'book'){
+    document.getElementById('bookTab').classList.remove('s-hide');
+    document.getElementById('tab-book').classList.add('active');
+    document.getElementById('greetSub').innerText = "Schedule your clinical appointment.";
+  } else if(tab === 'ai'){
+    document.getElementById('aiTab').classList.remove('s-hide');
+    document.getElementById('tab-ai').classList.add('active');
+    document.getElementById('greetSub').innerText = "Experience the power of digital smile design.";
+  } else {
+    location.reload();
+  }
+}
+
+function finish(){
+  alert('Clinical slot reserved! A specialist will contact you to confirm.');
+  window.location.href = 'index.html';
+}
+
+function logout(){
+  localStorage.removeItem('user_logged_in');
+  localStorage.removeItem('user_name');
+  window.location.href = 'index.html';
+}
+</script>
+
+</body>
+</html>

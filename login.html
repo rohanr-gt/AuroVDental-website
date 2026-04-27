@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Login — SmileVista Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#3E7A52;--dk:#2F5D3A;--deep:#1E3D26;--white:#fff;--bg:#F8F7F4;--soft:#EFF4F0;--footer:#1E3D26;--card-dk:#2A5234;--accent:#6B8F71;--mint:#C9A24A;--txt:#1F2937;--muted:#6B7280;--hover:#2F5D3A;--cta-gold:#C9A24A;--cta-hover:#B88E3B}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--txt);background:var(--bg);height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+
+.auth-card{background:#fff;padding:60px 50px;border-radius:30px;box-shadow:0 30px 80px rgba(30,61,38,0.12);max-width:480px;width:100%;text-align:center;position:relative;overflow:hidden}
+.auth-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--teal)}
+
+.auth-header{margin-bottom:40px}
+.auth-header h1{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--dk);margin-bottom:10px}
+.auth-header p{color:var(--muted);font-size:.92rem}
+
+.fg{text-align:left;margin-bottom:22px}
+.fg label{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dk);margin-bottom:8px;opacity:0.8}
+.fg input{width:100%;padding:15px;border-radius:12px;border:1.5px solid #E5E7EB;font-family:inherit;font-size:.9rem;outline:none;transition:.3s}
+.fg input:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(62,122,82,0.1)}
+
+.btn-auth{width:100%;background:var(--teal);color:#fff;border:none;padding:18px;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;transition:.3s;margin-top:10px}
+.btn-auth:hover{background:var(--dk);transform:translateY(-2px);box-shadow:0 10px 20px rgba(62,122,82,0.2)}
+
+.footer-links{margin-top:35px;padding-top:25px;border-top:1px solid #F3F4F6;display:flex;justify-content:space-between}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:.2s}
+.footer-links a:hover{color:var(--teal)}
+
+.fade-in{animation:fadeIn .4s ease forwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="auth-card fade-in">
+  <div class="auth-header">
+    <h1>Patient Portal</h1>
+    <p>Sign in to access your dashboard and records.</p>
+  </div>
+
+  <form onsubmit="handleLogin(event)">
+    <div class="fg">
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="patient@example.com" required>
+    </div>
+    
+    <div class="fg">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+
+    <button type="submit" class="btn-auth">Sign In</button>
+  </form>
+
+  <div class="footer-links">
+    <a href="register.html">New patient? Register here</a>
+    <a href="index.html">← Back to Site</a>
+  </div>
+</div>
+
+<script>
+function handleLogin(e){
+  e.preventDefault();
+  localStorage.setItem('user_logged_in', 'true');
+  localStorage.setItem('user_name', 'Sarah Johnson');
+  alert('Login successful! Welcome back.');
+  window.location.href = 'booking.html';
+}
+</script>
+
+</body>
+</html>

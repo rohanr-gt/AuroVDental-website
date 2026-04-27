@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dental Implants — SmileVista Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#3E7A52;--dk:#2F5D3A;--deep:#1E3D26;--white:#fff;--bg:#F8F7F4;--soft:#EFF4F0;--footer:#1E3D26;--card-dk:#2A5234;--accent:#6B8F71;--mint:#C9A24A;--txt:#1F2937;--muted:#6B7280;--hover:#2F5D3A;--cta-gold:#C9A24A;--cta-hover:#B88E3B}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--txt);background:var(--white);overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* UTILS */
+.btn-p{background:var(--teal);color:#fff;border:none;padding:13px 26px;border-radius:9px;font:.9rem/1 'DM Sans',sans-serif;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:0.2s}
+.btn-p:hover{background:var(--hover);transform:translateY(-2px)}
+.btn-cta{background:var(--cta-gold);color:#fff;border:none;padding:14px 30px;border-radius:10px;font:.95rem/1 'DM Sans',sans-serif;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s ease;box-shadow:0 5px 20px rgba(201,162,74,0.3);position:relative;overflow:hidden}
+.btn-cta:hover{background:var(--cta-hover);transform:translateY(-3px)}
+
+.lbl{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.lbl::before{content:'';display:block;width:24px;height:2px;background:var(--teal)}
+.ttl{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:600;color:var(--dk);margin-bottom:18px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:80px;background:rgba(255,255,255,.98);backdrop-filter:blur(15px);border-bottom:1px solid rgba(62,122,82,.08)}
+.nlogo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nlogo-i{width:42px;height:42px;background:var(--teal);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a:hover{color:var(--teal)}
+.ndrop{position:relative}
+.nd-menu{position:absolute;top:100%;left:0;background:#fff;min-width:200px;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.1);padding:10px 0;opacity:0;visibility:hidden;transform:translateY(10px);transition:all .3s ease;border:1px solid rgba(62,122,82,.08)}
+.ndrop:hover .nd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nd-menu a{display:block;padding:12px 25px;font-size:.85rem;font-weight:500;color:var(--txt);transition:.2s;text-align:left}
+.nd-menu a:hover{background:var(--soft);color:var(--teal)}
+.nh::after{content:'▾';font-size:.7rem;margin-left:5px;opacity:0.6}
+
+/* HERO */
+.s-hero{padding:180px 5% 120px;background:linear-gradient(rgba(30,61,38,0.85),rgba(30,61,38,0.85)), url('https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1800&q=80');background-size:cover;background-position:center;color:#fff;text-align:center}
+.s-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,7vw,5.5rem);margin-bottom:20px;line-height:1}
+
+/* JOURNEY */
+.journey-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:50px 0}
+.journey-step{background:var(--bg);padding:30px;border-radius:24px;border:1px solid rgba(62,122,82,.1);text-align:center;transition:0.3s}
+.journey-step:hover{transform:translateY(-10px);background:var(--white)}
+.journey-num{width:40px;height:40px;background:var(--teal);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-weight:600}
+
+/* SLIDER */
+.ba-container{position:relative;width:100%;max-width:800px;height:500px;margin:40px auto;border-radius:30px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.15)}
+.ba-img{position:absolute;top:0;left:0;width:100%;height:100%}
+.ba-before{z-index:2;clip-path:inset(0 50% 0 0)}
+.ba-after{z-index:1}
+.ba-slider{position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;cursor:ew-resize;-webkit-appearance:none;background:transparent;outline:none}
+.ba-slider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:500px;background:var(--mint);box-shadow:0 0 20px rgba(0,0,0,0.5)}
+
+/* SMART WHATSAPP */
+.wa-float{position:fixed;bottom:30px;right:30px;z-index:900;background:#25D366;color:#fff;padding:15px 25px;border-radius:50px;text-decoration:none;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(37,211,102,0.3);transition:0.3s}
+.wa-float:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(37,211,102,0.4)}
+
+/* SCROLL CTA */
+#scroll-cta{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:850;display:none;background:var(--deep);padding:15px 30px;border-radius:50px;color:#fff;box-shadow:0 20px 50px rgba(0,0,0,0.2);animation:slideUp 0.5s ease}
+
+@media(max-width:968px){
+  .journey-grid{grid-template-columns:1fr 1fr}
+  .nlinks{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nlogo">
+    <div class="nlogo-i"><svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M12 2C7.5 2 4 5.5 4 10c0 2.5 1.1 4.7 2.9 6.2L8 21h8l1.1-4.8C18.9 14.7 20 12.5 20 10c0-4.5-3.5-8-8-8zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/></svg></div>
+    <span style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:var(--dk)">SmileVista</span>
+  </a>
+  <ul class="nlinks">
+    <li><a href="index.html">Home</a></li>
+    <li class="ndrop">
+      <a href="services.html" class="nh" style="color:var(--teal)">Services</a>
+      <div class="nd-menu">
+        <a href="smile-designing.html">Smile Designing</a>
+        <a href="aligners.html">Aligners & Braces</a>
+        <a href="implants.html">Dental Implants</a>
+      </div>
+    </li>
+    <li><a href="results.html">Results</a></li>
+    <li><a href="assessment.html">Assessment</a></li>
+  </ul>
+  <a href="index.html#appointment" class="btn-cta">Book Consultation</a>
+</nav>
+
+<header class="s-hero">
+  <div class="lbl" style="color:var(--mint); border-color:var(--mint)">Permanent Restoration</div>
+  <h1>Advanced <em>Dental Implants</em></h1>
+  <p style="font-size:1.2rem; max-width:800px; margin:20px auto 40px; opacity:0.9">The gold standard for tooth replacement. Swiss precision meets surgical expertise for a lifetime of natural-feeling smiles.</p>
+  <a href="index.html#appointment" class="btn-cta">Start My Restorative Evaluation</a>
+</header>
+
+<section style="padding:100px 5%; text-align:center">
+  <div class="lbl">Life-Long Results</div>
+  <h2 class="ttl">Permanent <em>Replacement</em></h2>
+  <p style="color:var(--muted); max-width:600px; margin:0 auto 40px; line-height:1.7">Regain 100% of your biting power and prevent facial sagging with our biologically compatible implant solutions.</p>
+  
+  <div class="ba-container">
+    <div class="ba-img ba-after" style="background-image:url('https://images.unsplash.com/photo-1597764650030-984852ad3972?w=1200&q=80')"></div>
+    <div class="ba-img ba-before" id="beforeImg" style="background-image:url('https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&q=80')"></div>
+    <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="slide(this)">
+  </div>
+</section>
+
+<section style="padding:100px 5%; background:var(--soft)">
+  <div style="text-align:center; margin-bottom:60px">
+    <div class="lbl">Precision Flow</div>
+    <h2 class="ttl">The <em>Implant Journey</em></h2>
+  </div>
+  
+  <div class="journey-grid">
+    <div class="journey-step"><div class="journey-num">1</div><h3>Bone Mapping</h3><p style="font-size:.9rem; margin-top:10px; color:var(--muted)">We use 3D CBCT scans to ensure perfect implant placement and bone stability.</p></div>
+    <div class="journey-step"><div class="journey-num">2</div><h3>Precision Surgery</h3><p style="font-size:.9rem; margin-top:10px; color:var(--muted)">Painless insertion of the titanium post using minimally invasive techniques.</p></div>
+    <div class="journey-step"><div class="journey-num">3</div><h3>Natural Bond</h3><p style="font-size:.9rem; margin-top:10px; color:var(--muted)">Osseointegration occurs as your bone naturally fuses with the implant root.</p></div>
+    <div class="journey-step"><div class="journey-num">4</div><h3>Crown Placement</h3><p style="font-size:.9rem; margin-top:10px; color:var(--muted)">A custom porcelain crown is fitted for a tooth that looks and feels 100% natural.</p></div>
+  </div>
+</section>
+
+<section style="padding:100px 5%; text-align:center">
+  <div style="background:var(--dk); color:#fff; padding:80px; border-radius:40px">
+    <h2 class="ttl" style="color:#fff">Restore Your <em>Confidence?</em></h2>
+    <p style="opacity:0.8; margin-bottom:40px">Implants are for life. Book your initial clinical assessment today.</p>
+    <a href="index.html#appointment" class="btn-cta" style="background:var(--mint)">Get My Implant Plan Now</a>
+  </div>
+</section>
+
+<footer style="padding:40px 5%; text-align:center; background:var(--footer); color:#fff">
+  <p>© 2026 SmileVista Dental. Premium Care, Worldwide Trust.</p>
+</footer>
+
+<a href="https://wa.me/919876543210?text=I%20want%20Implant%20consultation" class="wa-float">
+  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.03 2c-5.52 0-10 4.48-10 10 0 1.91.53 3.68 1.46 5.2L2 22l4.98-1.46c1.47.8 3.12 1.26 4.88 1.26 5.52 0 10-4.48 10-10s-4.48-10-10.17-10zm5.83 14.18c-.24.67-1.17 1.24-1.88 1.32-.48.05-1.1.07-3.11-.76-2.57-1.07-4.23-3.71-4.36-3.89-.12-.17-1.03-1.37-1.03-2.61 0-1.24.65-1.85.88-2.1.24-.25.48-.31.64-.31.16 0 .32.01.46.01.15 0 .35-.06.54.41.2.48.68 1.66.74 1.78.06.12.1.26.02.43-.08.17-.12.28-.24.42-.12.14-.26.31-.37.42-.13.13-.26.26-.11.51.15.25.68 1.12 1.46 1.82.99.9 1.83 1.18 2.08 1.3.25.12.4.1.55-.08.15-.17.64-.75.82-1 .17-.26.34-.21.58-.12.24.08 1.5.71 1.76.84.26.12.43.18.5.3.06.12.06.7-.18 1.38z"/></svg>
+  WhatsApp Implant Experts
+</a>
+
+<div id="scroll-cta" style="position:fixed; bottom:100px; left:50%; transform:translateX(-50%); z-index:850; display:none; background:var(--deep); padding:15px 30px; border-radius:50px; color:#fff; box-shadow:0 20px 50px rgba(0,0,0,0.2)">
+  <a href="index.html#appointment" style="color:#fff; text-decoration:none; font-weight:600">Free Assessment ✨ Book Now</a>
+</div>
+
+<script>
+function slide(x){
+  document.getElementById('beforeImg').style.clipPath = `inset(0 ${100 - x.value}% 0 0)`;
+}
+
+window.addEventListener("scroll", () => {
+  const scta = document.getElementById("scroll-cta");
+  if(window.scrollY > 600){
+    scta.style.display = "block";
+  } else {
+    scta.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>

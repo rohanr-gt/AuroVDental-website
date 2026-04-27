@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Results — SmileVista Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#3E7A52;--dk:#2F5D3A;--deep:#1E3D26;--white:#fff;--bg:#F8F7F4;--soft:#EFF4F0;--footer:#1E3D26;--card-dk:#2A5234;--accent:#6B8F71;--mint:#C9A24A;--txt:#1F2937;--muted:#6B7280;--hover:#2F5D3A;--cta-gold:#C9A24A;--cta-hover:#B88E3B}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--txt);background:var(--bg);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:76px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(62,122,82,.1)}
+.nlogo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nlogo-i{width:40px;height:40px;background:var(--teal);border-radius:11px;display:flex;align-items:center;justify-content:center}
+.nlogo-i svg{width:22px;height:22px;fill:#fff}
+.nlogo-t{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--dk)}
+.nlogo-t span{color:var(--teal)}
+.nlinks{display:flex;gap:28px;list-style:none}
+.nlinks a{text-decoration:none;font-size:.875rem;font-weight:500;color:var(--txt);transition:.2s}
+.nlinks a:hover{color:var(--teal)}
+.btn-p{background:var(--teal);color:#fff;border:none;padding:12px 24px;border-radius:9px;font-size:.9rem;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:.2s}
+.btn-p:hover{background:var(--hover);transform:translateY(-2px)}
+
+/* HERO */
+.hero{padding:160px 5% 80px;background:var(--dk);color:#fff;text-align:center;position:relative}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:600;line-height:1}
+.hero h1 em{font-style:italic;color:var(--mint)}
+.hero p{font-size:1.1rem;color:rgba(255,255,255,.7);margin-top:20px;max-width:700px;margin-left:auto;margin-right:auto}
+
+/* RESULTS GRID */
+.res-grid{padding:80px 5%;display:grid;grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));gap:40px}
+.res-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(30,61,38,0.05);transition:.3s}
+.res-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(30,61,38,0.1)}
+.res-ba{display:flex;height:300px;border-bottom:1px solid #eee;position:relative}
+.res-img-wrap{flex:1;position:relative;overflow:hidden}
+.res-img-wrap img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.res-card:hover .res-img-wrap img{transform:scale(1.05)}
+.res-label{position:absolute;top:15px;padding:4px 12px;border-radius:100px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff;z-index:2}
+.res-label.b{left:15px;background:rgba(0,0,0,.6)}
+.res-label.a{right:15px;background:var(--teal)}
+.res-info{padding:30px}
+.res-cat{font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--teal);letter-spacing:1.5px;margin-bottom:10px;display:block}
+.res-ttl{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--dk);margin-bottom:12px}
+.res-txt{font-size:.88rem;color:var(--muted);line-height:1.7}
+
+/* CTA */
+.cta-sec{padding:100px 5%;background:var(--deep);color:#fff;text-align:center}
+.cta-sec h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;margin-bottom:20px}
+.cta-sec p{opacity:.8;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+
+footer{padding:40px 5%;background:var(--deep);color:rgba(255,255,255,.4);text-align:center;font-size:.8rem;border-top:1px solid rgba(255,255,255,.05)}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nlogo">
+    <div class="nlogo-i"><svg viewBox="0 0 24 24"><path d="M12 2C7.5 2 4 5.5 4 10c0 2.5 1.1 4.7 2.9 6.2L8 21h8l1.1-4.8C18.9 14.7 20 12.5 20 10c0-4.5-3.5-8-8-8zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/></svg></div>
+    <span class="nlogo-t">Smile<span>Vista</span></span>
+  </a>
+  <ul class="nlinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="assessment.html">Smile Assessment</a></li>
+    <li><a href="results.html" style="color:var(--teal)">Results</a></li>
+    <li><a href="index.html#appointment">Contact</a></li>
+  </ul>
+  <a href="index.html#appointment" class="btn-p">Book Now</a>
+</nav>
+
+<header class="hero">
+  <h1>Visualizing <em>Transformation</em></h1>
+  <p>Authentic patient clinical outcomes showcasing the precision and artistry of the SmileVista specialized team.</p>
+</header>
+
+<section class="res-grid">
+  <!-- Case 1: Full Mouth Rehab -->
+  <div class="res-card">
+    <div class="res-ba">
+      <div class="res-img-wrap">
+        <img src="https://images.unsplash.com/photo-1627483262769-04d0a1401487?w=600&q=80" alt="Before Full Mouth">
+        <div class="res-label b">Before</div>
+      </div>
+      <div style="width:2px; background:#fff; z-index:5"></div>
+      <div class="res-img-wrap">
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80" alt="After Full Mouth">
+        <div class="res-label a">After</div>
+      </div>
+    </div>
+    <div class="res-info">
+      <span class="res-cat">Full Mouth Rehabilitation</span>
+      <h3 class="res-ttl">Restoring Health & Function</h3>
+      <p class="res-txt">A comprehensive reconstruction using Nobel Biocare implants and premium Zirconia crowns to restore full bite functionality and esthetics.</p>
+    </div>
+  </div>
+
+  <!-- Case 2: Smile Design -->
+  <div class="res-card">
+    <div class="res-ba">
+      <div class="res-img-wrap">
+        <img src="https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?w=600&q=80" alt="Before Veneers">
+        <div class="res-label b">Before</div>
+      </div>
+      <div style="width:2px; background:#fff; z-index:5"></div>
+      <div class="res-img-wrap">
+        <img src="https://images.unsplash.com/photo-1629909613654-28a3a7c4bd45?w=600&q=80" alt="After Veneers">
+        <div class="res-label a">After</div>
+      </div>
+    </div>
+    <div class="res-info">
+      <span class="res-cat">Cosmetic Smile Designing</span>
+      <h3 class="res-ttl">E-Max Porcelain Veneers</h3>
+      <p class="res-txt">Closed diastema and corrected minor crowding using 8 ultra-thin porcelain veneers, achieving a harmonious and bright smile curve.</p>
+    </div>
+  </div>
+
+  <!-- Case 3: Dental Implants -->
+  <div class="res-card">
+    <div class="res-ba">
+      <div class="res-img-wrap">
+        <img src="https://images.unsplash.com/photo-1593113503873-e4d74c2e40f7?w=600&q=80" alt="Before Implants">
+        <div class="res-label b">Before</div>
+      </div>
+      <div style="width:2px; background:#fff; z-index:5"></div>
+      <div class="res-img-wrap">
+        <img src="https://images.unsplash.com/photo-1588776813677-77adc595ee01?w=600&q=80" alt="After Implants">
+        <div class="res-label a">After</div>
+      </div>
+    </div>
+    <div class="res-info">
+      <span class="res-cat">Implantology</span>
+      <h3 class="res-ttl">Single Tooth Replacement</h3>
+      <p class="res-txt">Advanced Straumann implant system used for a seamless single tooth replacement, matching the natural density and shade perfectly.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <h2>Begin Your <em>Journey</em></h2>
+  <p>Your dream smile is just a consultation away. Our specialists are ready to map out your personalized transformation plan.</p>
+  <a href="index.html#appointment" class="btn-p" style="padding:18px 40px; font-size:1.1rem">Schedule My Free Consultation</a>
+</section>
+
+<footer>
+  <p>© 2026 SmileVista Dental Centre. Precision Crafted Smiles.</p>
+</footer>
+
+</body>
+</html>
