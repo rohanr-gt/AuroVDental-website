@@ -505,17 +505,17 @@ const Home = () => {
       <section className="py-24 px-6 bg-[color:var(--bg)]">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-end">
           <div>
-            <div className="text-xs font-bold tracking-[0.3em] uppercase text-[color:var(--teal)] mb-4">{t('home.testimonials.title')}</div>
+            <div className="text-xs font-bold tracking-[0.3em] uppercase text-[color:var(--teal)] mb-4">Patient Experiences</div>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-[color:var(--dk)] leading-tight">
-              <span dangerouslySetInnerHTML={{ __html: t('home.testimonials.subtitle').replace('{across}', `<span className="italic text-[color:var(--teal)]">${t('home.testimonials.across')}</span>`) }} />
+              Real patient experiences from our dental implant and smile care journeys.
             </h2>
           </div>
           <p className="text-[color:var(--muted)] leading-relaxed">
-            {t('home.testimonials.desc')}
+            Hear directly from patients who chose Auro V Dental for confidence, comfort, and long-term smiles.
           </p>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-14 grid gap-6 md:grid-cols-3">
+        <div className="max-w-7xl mx-auto mt-14 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
               feat: true,
@@ -532,6 +532,11 @@ const Home = () => {
               q: t('home.testimonials.t3'),
               n: 'Anna Petrova',
               l: 'Moscow, Russia'
+            },
+            {
+              q: 'Got my implants done — feels just like natural teeth.\nProfessional care and smooth experience from start to finish.\nCompletely changed my confidence and quality of life.',
+              n: 'Auro V Dental Patient',
+              l: 'Bengaluru, India'
             }
           ].map((t) => (
             <div
@@ -544,7 +549,7 @@ const Home = () => {
               ].join(' ')}
             >
               <div className={t.feat ? 'text-[#C9A24A]' : 'text-[color:var(--teal)]'}>★★★★★</div>
-              <p className={['mt-4 leading-relaxed', t.feat ? 'text-white/75' : 'text-[color:var(--muted)]'].join(' ')}>
+              <p className={['mt-4 text-base leading-7 whitespace-pre-wrap', t.feat ? 'text-white/75' : 'text-[color:var(--muted)]'].join(' ')}>
                 {t.q}
               </p>
               <div className="mt-6 font-bold">{t.n}</div>

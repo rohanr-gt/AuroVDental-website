@@ -671,7 +671,7 @@ function answerFor(text) {
   if (includesAny(t, ['price', 'pricing', 'cost', 'fees', 'how much'])) {
     return {
       reply:
-        `Pricing depends on your case and the exact plan. If you tell me the treatment (smile designing / aligners / implants) and what you want to change, I can guide what factors affect the cost.\n\nFor a precise estimate, book a consultation: ${CLINIC.bookingPath}`,
+        `Implant pricing depends on your clinical condition and treatment plan. Typical starting ranges are:\n\n• Single Implant: ₹25,000 – ₹50,000\n• Multiple Implants: Based on case\n• Full Mouth Implants: ₹2L – ₹5L\n• All-on-4 / All-on-6: Starting from ₹2.5L\n\nFinal cost depends on your clinical condition and treatment plan.`,
       intent: 'pricing'
     };
   }
@@ -754,7 +754,11 @@ app.get('/api/faqs', (req, res) => {
   const faqs = [
     { id: 1, category: 'general', question: 'How long do treatments take?', answer: 'Treatment duration varies by procedure. Schedule a consultation for details.' },
     { id: 2, category: 'implants', question: 'Are dental implants safe?', answer: 'Yes, implants are FDA-approved and have a 95%+ success rate.' },
-    { id: 3, category: 'aligners', question: 'Can I eat with aligners?', answer: 'Remove aligners before eating. Wear them 22 hours daily for best results.' }
+    { id: 3, category: 'aligners', question: 'Can I eat with aligners?', answer: 'Remove aligners before eating. Wear them 22 hours daily for best results.' },
+    { id: 4, category: 'implants', question: 'How long do dental implants last?', answer: 'With proper care, implants can last many years or even a lifetime.' },
+    { id: 5, category: 'general', question: 'Is the procedure painful?', answer: 'The procedure is done under anesthesia and is generally comfortable.' },
+    { id: 6, category: 'general', question: 'How long does treatment take?', answer: 'Most implant treatments are completed within 3–7 days depending on the case.' },
+    { id: 7, category: 'general', question: 'Can I travel for treatment?', answer: 'Yes, we provide structured plans for outstation and international patients.' }
   ];
   res.json({ success: true, faqs });
 });
