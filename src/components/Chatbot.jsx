@@ -95,6 +95,14 @@ const Chatbot = () => {
               </div>
               <button
                 type="button"
+                onClick={() => sendMessage('Pricing')}
+                disabled={loading}
+                className="rounded-xl px-4 py-2 bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition disabled:opacity-50"
+              >
+                Pricing
+              </button>
+              <button
+                type="button"
                 onClick={() => setIsOpen(false)}
                 className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10 transition flex items-center justify-center"
                 aria-label="Close chat"
@@ -109,7 +117,7 @@ const Chatbot = () => {
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div
-                  className={`max-w-xs px-4 py-2 rounded-lg ${
+                  className={`max-w-xs px-4 py-2 rounded-lg whitespace-pre-wrap break-words ${
                     msg.type === 'user'
                       ? 'bg-[color:var(--teal)] text-white rounded-br-none'
                       : 'bg-gray-100 text-gray-800 rounded-bl-none'

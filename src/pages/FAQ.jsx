@@ -30,7 +30,11 @@ const FAQPage = () => {
         { id: 3, category: 'aligners', question: t('faq.q3'), answer: t('faq.a3') },
         { id: 4, category: 'general', question: t('faq.q4'), answer: t('faq.a4') },
         { id: 5, category: 'smile-designing', question: t('faq.q5'), answer: t('faq.a5') },
-        { id: 6, category: 'general', question: t('faq.q6'), answer: t('faq.a6') }
+        { id: 6, category: 'general', question: t('faq.q6'), answer: t('faq.a6') },
+        { id: 7, category: 'implants', question: 'How long do dental implants last?', answer: 'With proper care, implants can last many years or even a lifetime.' },
+        { id: 8, category: 'general', question: 'Is the procedure painful?', answer: 'The procedure is done under anesthesia and is generally comfortable.' },
+        { id: 9, category: 'general', question: 'How long does treatment take?', answer: 'Most implant treatments are completed within 3–7 days depending on the case.' },
+        { id: 10, category: 'general', question: 'Can I travel for treatment?', answer: 'Yes, we provide structured plans for outstation and international patients.' }
       ]);
       setLoading(false);
     }
