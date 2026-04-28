@@ -25,8 +25,11 @@ const DentalImplants = () => {
       { title: t('dentalImplants.step1Title'), desc: t('dentalImplants.step1Desc') },
       { title: t('dentalImplants.step2Title'), desc: t('dentalImplants.step2Desc') },
       { title: t('dentalImplants.step3Title'), desc: t('dentalImplants.step3Desc') },
-      { title: t('dentalImplants.step4Title'), desc: t('dentalImplants.step4Desc') }
+      { title: t('dentalImplants.step4Title'), desc: t('dentalImplants.step4Desc') },
+      { title: t('dentalImplants.step5Title'), desc: t('dentalImplants.step5Desc') }
     ],
+    journeyTitle: t('dentalImplants.customJourneyTitle'),
+    outstationText: t('dentalImplants.outstationText'),
     afterImg: "https://www.sanmarcosdental.com/blog/wp-content/uploads/implant-diagram.jpeg"
   };
 

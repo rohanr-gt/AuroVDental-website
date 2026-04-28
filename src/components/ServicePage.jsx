@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const ServicePage = ({ title, subtitle, heroImg, benefits, steps, beforeImg, afterImg }) => {
+const ServicePage = ({ title, subtitle, heroImg, benefits, steps, beforeImg, afterImg, journeyTitle, outstationText }) => {
   const { t } = useLanguage();
   return (
     <div className="bg-[color:var(--bg)] min-h-screen pt-20">
@@ -38,12 +38,12 @@ const ServicePage = ({ title, subtitle, heroImg, benefits, steps, beforeImg, aft
       <section className="py-20 bg-[color:var(--deep)] text-white px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-serif font-bold mb-4">{t('services.journeyTitle')}</h2>
+            <h2 className="text-3xl font-serif font-bold mb-4 uppercase tracking-wide">{journeyTitle || t('services.journeyTitle')}</h2>
             <p className="opacity-70">{t('services.journeySub')}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="flex flex-col md:flex-row justify-center gap-8">
             {steps.map((step, i) => (
-              <div key={i} className="relative text-center">
+              <div key={i} className="relative text-center flex-1">
                 <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-2xl font-bold text-[#C9A24A] mx-auto mb-6 border-2 border-white/15">
                   {i + 1}
                 </div>
@@ -57,6 +57,48 @@ const ServicePage = ({ title, subtitle, heroImg, benefits, steps, beforeImg, aft
           </div>
         </div>
       </section>
+
+      {/* Outstation Section */}
+      {outstationText && (
+        <section className="py-20 px-4 bg-gray-50 border-y border-gray-100">
+          <div className="max-w-4xl mx-auto bg-white rounded-3xl p-10 md:p-14 shadow-sm border border-black/5 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-[color:var(--teal)]/5 rounded-bl-full"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#C9A24A]/5 rounded-tr-full"></div>
+            
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-[color:var(--deep)] mb-4">
+              {t('services.outstationTitle')}
+            </h2>
+            <div className="w-16 h-1 bg-[color:var(--teal)] mx-auto mb-6"></div>
+            
+            <p className="text-lg text-[color:var(--dk)] mb-10 font-medium">
+              {outstationText}
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-left max-w-3xl mx-auto">
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-[color:var(--teal)]/10 text-[color:var(--teal)] flex items-center justify-center shrink-0 text-sm">✓</div>
+                <span className="text-[color:var(--muted)]">{t('services.outstationPoint1')}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-[color:var(--teal)]/10 text-[color:var(--teal)] flex items-center justify-center shrink-0 text-sm">✓</div>
+                <span className="text-[color:var(--muted)]">{t('services.outstationPoint2')}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-[color:var(--teal)]/10 text-[color:var(--teal)] flex items-center justify-center shrink-0 text-sm">✓</div>
+                <span className="text-[color:var(--muted)]">{t('services.outstationPoint3')}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-[color:var(--teal)]/10 text-[color:var(--teal)] flex items-center justify-center shrink-0 text-sm">✓</div>
+                <span className="text-[color:var(--muted)]">{t('services.outstationPoint4')}</span>
+              </div>
+              <div className="flex items-center gap-3 md:col-span-2 md:justify-center">
+                <div className="w-6 h-6 rounded-full bg-[color:var(--teal)]/10 text-[color:var(--teal)] flex items-center justify-center shrink-0 text-sm">✓</div>
+                <span className="text-[color:var(--muted)]">{t('services.outstationPoint5')}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Results Section */}
       {afterImg && (

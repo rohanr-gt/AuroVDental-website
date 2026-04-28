@@ -25,8 +25,11 @@ const AlignersBraces = () => {
       { title: t('alignersBraces.step1Title'), desc: t('alignersBraces.step1Desc') },
       { title: t('alignersBraces.step2Title'), desc: t('alignersBraces.step2Desc') },
       { title: t('alignersBraces.step3Title'), desc: t('alignersBraces.step3Desc') },
-      { title: t('alignersBraces.step4Title'), desc: t('alignersBraces.step4Desc') }
+      { title: t('alignersBraces.step4Title'), desc: t('alignersBraces.step4Desc') },
+      { title: t('alignersBraces.step5Title'), desc: t('alignersBraces.step5Desc') }
     ],
+    journeyTitle: t('alignersBraces.customJourneyTitle'),
+    outstationText: t('alignersBraces.outstationText'),
     afterImg: "https://dentistry.uic.edu/wp-content/uploads/sites/741/2020/10/iStock-501427146-1090x595.jpg"
   };
 

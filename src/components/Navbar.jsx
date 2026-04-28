@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -23,12 +25,13 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Our Works', path: '/#our-work' },
-    { name: 'AI Preview', path: '/ai-preview' },
-    { name: 'Gallery', path: '/results' },
-    { name: 'Assessment', path: '/assessment' },
-    { name: 'FAQ', path: '/faq' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.aboutUs'), path: '/#about' },
+    { name: t('nav.ourWork'), path: '/#our-work' },
+    { name: t('nav.aiPreview'), path: '/ai-preview' },
+    { name: t('nav.results'), path: '/results' },
+    { name: t('nav.assessment'), path: '/assessment' },
+    { name: t('nav.faq'), path: '/faq' },
   ];
 
   return (
@@ -42,21 +45,21 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8 font-medium text-[color:var(--txt)]/70">
-          <Link to="/" className="hover:text-[color:var(--teal)] transition-colors">Home</Link>
+        <div className="hidden lg:flex items-center gap-3 xl:gap-5 text-[15px] font-medium text-[color:var(--txt)]/70">
+          <Link to="/" className="hover:text-[color:var(--teal)] transition-colors whitespace-nowrap">{t('nav.home')}</Link>
           <div className="relative group">
-            <span className="cursor-pointer hover:text-[color:var(--teal)] transition-colors flex items-center gap-1">
-              Services
+            <span className="cursor-pointer hover:text-[color:var(--teal)] transition-colors flex items-center gap-1 whitespace-nowrap">
+              {t('nav.services')}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </span>
             <div className="absolute top-full left-0 mt-2 w-56 bg-white border border-black/5 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all py-2 translate-y-2 group-hover:translate-y-0">
-              <Link to="/smile-designing" className="block px-6 py-3 hover:bg-[color:var(--soft)] hover:text-[color:var(--teal)] transition-colors">Smile Designing</Link>
-              <Link to="/aligners-braces" className="block px-6 py-3 hover:bg-[color:var(--soft)] hover:text-[color:var(--teal)] transition-colors">Aligners & Braces</Link>
-              <Link to="/dental-implants" className="block px-6 py-3 hover:bg-[color:var(--soft)] hover:text-[color:var(--teal)] transition-colors">Dental Implants</Link>
+              <Link to="/smile-designing" className="block px-6 py-3 hover:bg-[color:var(--soft)] hover:text-[color:var(--teal)] transition-colors">{t('nav.smileDesigning')}</Link>
+              <Link to="/aligners-braces" className="block px-6 py-3 hover:bg-[color:var(--soft)] hover:text-[color:var(--teal)] transition-colors">{t('nav.alignersBraces')}</Link>
+              <Link to="/dental-implants" className="block px-6 py-3 hover:bg-[color:var(--soft)] hover:text-[color:var(--teal)] transition-colors">{t('nav.dentalImplants')}</Link>
             </div>
           </div>
           {navLinks.slice(1).map(link => (
-            <Link key={link.path} to={link.path} className="hover:text-[color:var(--teal)] transition-colors">{link.name}</Link>
+            <Link key={link.path} to={link.path} className="hover:text-[color:var(--teal)] transition-colors whitespace-nowrap">{link.name}</Link>
           ))}
         </div>
 

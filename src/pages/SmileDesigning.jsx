@@ -25,8 +25,11 @@ const SmileDesigning = () => {
       { title: t('smileDesigning.step1Title'), desc: t('smileDesigning.step1Desc') },
       { title: t('smileDesigning.step2Title'), desc: t('smileDesigning.step2Desc') },
       { title: t('smileDesigning.step3Title'), desc: t('smileDesigning.step3Desc') },
-      { title: t('smileDesigning.step4Title'), desc: t('smileDesigning.step4Desc') }
+      { title: t('smileDesigning.step4Title'), desc: t('smileDesigning.step4Desc') },
+      { title: t('smileDesigning.step5Title'), desc: t('smileDesigning.step5Desc') }
     ],
+    journeyTitle: t('smileDesigning.customJourneyTitle'),
+    outstationText: t('smileDesigning.outstationText'),
     afterImg: "https://parthadental.com/wp-content/uploads/2022/09/cosmetic-dentistry-750x750.jpg"
   };
 

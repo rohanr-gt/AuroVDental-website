@@ -181,7 +181,7 @@ const Home = () => {
       </section>
 
       {/* About Split */}
-      <section className="grid lg:grid-cols-2">
+      <section id="about" className="grid lg:grid-cols-2">
         <div className="relative min-h-[420px] overflow-hidden">
           <img
             src="https://static.vecteezy.com/system/resources/thumbnails/071/062/019/small/dental-checkup-examination-procedure-with-doctor-and-patient-free-photo.jpg"
@@ -335,10 +335,10 @@ const Home = () => {
               {t('nav.ourWork')}
             </div>
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-[color:var(--dk)] mb-6">
-              Witness the <span className="italic text-[color:var(--teal)]">Magic</span> of Our Works
+              {t('home.witnessThe')}<span className="italic text-[color:var(--teal)]">{t('home.magic')}</span>{t('home.ofOurWorks')}
             </h2>
             <p className="text-[color:var(--muted)] max-w-2xl mx-auto text-lg leading-relaxed">
-              Real results for real patients. Explore our collection of dental transformations.
+              {t('home.realResults')}
             </p>
           </div>
 
@@ -505,13 +505,13 @@ const Home = () => {
       <section className="py-24 px-6 bg-[color:var(--bg)]">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-end">
           <div>
-            <div className="text-xs font-bold tracking-[0.3em] uppercase text-[color:var(--teal)] mb-4">Patient Experiences</div>
+            <div className="text-xs font-bold tracking-[0.3em] uppercase text-[color:var(--teal)] mb-4">{t('home.patientExperiences')}</div>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-[color:var(--dk)] leading-tight">
-              Real patient experiences from our dental implant and smile care journeys.
+              {t('home.patientExpSub')}
             </h2>
           </div>
           <p className="text-[color:var(--muted)] leading-relaxed">
-            Hear directly from patients who chose Auro V Dental for confidence, comfort, and long-term smiles.
+            {t('home.patientExpDesc')}
           </p>
         </div>
 
