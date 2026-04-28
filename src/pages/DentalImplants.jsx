@@ -14,9 +14,12 @@ const DentalImplants = () => {
     subtitle: t('dentalImplants.subtitle'),
     heroImg: implantsBg,
     benefits: [
-      { icon: "🛡️", title: t('dentalImplants.benefit1Title'), desc: t('dentalImplants.benefit1Desc') },
-      { icon: "🥩", title: t('dentalImplants.benefit2Title'), desc: t('dentalImplants.benefit2Desc') },
-      { icon: "🦴", title: t('dentalImplants.benefit3Title'), desc: t('dentalImplants.benefit3Desc') }
+      { icon: "🏆", title: t('dentalImplants.benefit1Title'), desc: t('dentalImplants.benefit1Desc') },
+      { icon: "👨‍⚕️", title: t('dentalImplants.benefit2Title'), desc: t('dentalImplants.benefit2Desc') },
+      { icon: "💻", title: t('dentalImplants.benefit3Title'), desc: t('dentalImplants.benefit3Desc') },
+      { icon: "💎", title: t('dentalImplants.benefit4Title'), desc: t('dentalImplants.benefit4Desc') },
+      { icon: "🧼", title: t('dentalImplants.benefit5Title'), desc: t('dentalImplants.benefit5Desc') },
+      { icon: "🤝", title: t('dentalImplants.benefit6Title'), desc: t('dentalImplants.benefit6Desc') }
     ],
     steps: [
       { title: t('dentalImplants.step1Title'), desc: t('dentalImplants.step1Desc') },

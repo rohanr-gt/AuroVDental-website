@@ -14,9 +14,12 @@ const SmileDesigning = () => {
     subtitle: t('smileDesigning.subtitle'),
     heroImg: smileDesignBg,
     benefits: [
-      { icon: "🎨", title: t('smileDesigning.benefit1Title'), desc: t('smileDesigning.benefit1Desc') },
-      { icon: "🔬", title: t('smileDesigning.benefit2Title'), desc: t('smileDesigning.benefit2Desc') },
-      { icon: "⚡", title: t('smileDesigning.benefit3Title'), desc: t('smileDesigning.benefit3Desc') }
+      { icon: "🏆", title: t('smileDesigning.benefit1Title'), desc: t('smileDesigning.benefit1Desc') },
+      { icon: "👨‍⚕️", title: t('smileDesigning.benefit2Title'), desc: t('smileDesigning.benefit2Desc') },
+      { icon: "💻", title: t('smileDesigning.benefit3Title'), desc: t('smileDesigning.benefit3Desc') },
+      { icon: "💎", title: t('smileDesigning.benefit4Title'), desc: t('smileDesigning.benefit4Desc') },
+      { icon: "🧼", title: t('smileDesigning.benefit5Title'), desc: t('smileDesigning.benefit5Desc') },
+      { icon: "🤝", title: t('smileDesigning.benefit6Title'), desc: t('smileDesigning.benefit6Desc') }
     ],
     steps: [
       { title: t('smileDesigning.step1Title'), desc: t('smileDesigning.step1Desc') },

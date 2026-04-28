@@ -14,9 +14,12 @@ const AlignersBraces = () => {
     subtitle: t('alignersBraces.subtitle'),
     heroImg: alignersBg,
     benefits: [
-      { icon: "✨", title: t('alignersBraces.benefit1Title'), desc: t('alignersBraces.benefit1Desc') },
-      { icon: "🥗", title: t('alignersBraces.benefit2Title'), desc: t('alignersBraces.benefit2Desc') },
-      { icon: "📉", title: t('alignersBraces.benefit3Title'), desc: t('alignersBraces.benefit3Desc') }
+      { icon: "🏆", title: t('alignersBraces.benefit1Title'), desc: t('alignersBraces.benefit1Desc') },
+      { icon: "👨‍⚕️", title: t('alignersBraces.benefit2Title'), desc: t('alignersBraces.benefit2Desc') },
+      { icon: "💻", title: t('alignersBraces.benefit3Title'), desc: t('alignersBraces.benefit3Desc') },
+      { icon: "💎", title: t('alignersBraces.benefit4Title'), desc: t('alignersBraces.benefit4Desc') },
+      { icon: "🧼", title: t('alignersBraces.benefit5Title'), desc: t('alignersBraces.benefit5Desc') },
+      { icon: "🤝", title: t('alignersBraces.benefit6Title'), desc: t('alignersBraces.benefit6Desc') }
     ],
     steps: [
       { title: t('alignersBraces.step1Title'), desc: t('alignersBraces.step1Desc') },
