@@ -352,7 +352,7 @@ app.post('/api/appointments', async (req, res) => {
         service || null,
         issue || null,
         'new',
-        new Date()
+        new Date().toISOString().slice(0, 19).replace('T', ' ')
       ]
     );
     leadStatus = { saved: true, leadId: result.lastID };
@@ -448,7 +448,7 @@ app.post(
     }
 
     const imageUrl = `/uploads/${imageFile.filename}`;
-    const createdAt = new Date();
+    const createdAt = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     dbRun(
       `INSERT INTO gallery (category, title, imageUrl, createdAt) VALUES (?, ?, ?, ?)`,
