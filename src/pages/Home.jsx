@@ -29,6 +29,10 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [dynamicReviews, setDynamicReviews] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupData, setPopupData] = useState({ name: '', phone: '' });
+  const [popupSubmitted, setPopupSubmitted] = useState(false);
+  const [popupLoading, setPopupLoading] = useState(false);
 
   const location = useLocation();
 
@@ -58,7 +62,36 @@ const Home = () => {
   useEffect(() => {
     fetchOurWorkGallery();
     fetchDynamicReviews();
+
+    // Show popup after 5 seconds if not already shown this session
+    const hasShownPopup = sessionStorage.getItem('hasShownLeadPopup');
+    if (!hasShownPopup) {
+      const timer = setTimeout(() => {
+        setShowPopup(true);
+        sessionStorage.setItem('hasShownLeadPopup', 'true');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
   }, []);
+
+  const handlePopupSubmit = async (e) => {
+    e.preventDefault();
+    if (!popupData.name || !popupData.phone) return;
+    setPopupLoading(true);
+    try {
+      await axios.post(`${API_BASE}/api/leads`, {
+        name: popupData.name,
+        phone: popupData.phone,
+        source: 'Visitor Popup'
+      });
+      setPopupSubmitted(true);
+      setTimeout(() => setShowPopup(false), 3000);
+    } catch (err) {
+      console.error('Failed to submit visitor lead', err);
+    } finally {
+      setPopupLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (location.hash) {
@@ -96,6 +129,20 @@ const Home = () => {
           'Accept': 'application/json'
         }
       });
+      
+      // Also save to our own leads database
+      try {
+        await axios.post(`${API_BASE}/api/leads`, {
+          name: `${contactData.firstName} ${contactData.lastName}`.trim(),
+          phone: contactData.phone || 'Not Provided',
+          email: contactData.email,
+          message: contactData.message,
+          source: 'Contact Form'
+        });
+      } catch (err) {
+        console.error('Failed to save lead to local database', err);
+      }
+
       setSubmitted(true);
     } catch (error) {
       console.error('Contact error:', error);
@@ -715,6 +762,68 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Visitor Lead Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative overflow-hidden">
+            <button 
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+
+            {!popupSubmitted ? (
+              <>
+                <div className="text-[color:var(--teal)] font-bold tracking-[0.2em] uppercase text-xs mb-3">Limited Time Offer</div>
+                <h3 className="text-2xl font-serif font-bold text-[color:var(--dk)] mb-2">Get a Free Consultation</h3>
+                <p className="text-[color:var(--muted)] mb-6">Leave your details and our experts will call you back shortly to discuss your dental needs.</p>
+                
+                <form onSubmit={handlePopupSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wide text-[color:var(--muted)] mb-2">Full Name</label>
+                    <input 
+                      type="text"
+                      required
+                      value={popupData.name}
+                      onChange={(e) => setPopupData({ ...popupData, name: e.target.value })}
+                      className="w-full bg-[color:var(--bg)] border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-[color:var(--teal)]"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wide text-[color:var(--muted)] mb-2">Phone Number</label>
+                    <input 
+                      type="tel"
+                      required
+                      value={popupData.phone}
+                      onChange={(e) => setPopupData({ ...popupData, phone: e.target.value })}
+                      className="w-full bg-[color:var(--bg)] border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-[color:var(--teal)]"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    disabled={popupLoading}
+                    className="w-full bg-[color:var(--teal)] text-white py-4 rounded-xl font-bold hover:bg-[color:var(--dk)] transition-colors disabled:opacity-50"
+                  >
+                    {popupLoading ? 'Submitting...' : 'Call Me Back'}
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h3 className="text-2xl font-serif font-bold text-[color:var(--dk)] mb-2">Thank You!</h3>
+                <p className="text-[color:var(--muted)]">We have received your request and will contact you shortly.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

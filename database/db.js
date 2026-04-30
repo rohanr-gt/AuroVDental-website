@@ -94,6 +94,19 @@ export async function initDb() {
         createdAt DATETIME NOT NULL
       )
     `);
+    await pool.execute(`
+      CREATE TABLE IF NOT EXISTS leads (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        phone VARCHAR(50) NOT NULL,
+        email VARCHAR(255),
+        service VARCHAR(255),
+        source VARCHAR(100) NOT NULL DEFAULT 'Website',
+        message TEXT,
+        status VARCHAR(50) NOT NULL DEFAULT 'new',
+        createdAt DATETIME NOT NULL
+      )
+    `);
     console.log('✅ Database Tables Verified');
     return pool;
   } catch (err) {

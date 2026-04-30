@@ -429,6 +429,32 @@ app.get('/api/gallery', (req, res) => {
 // ============================================
 // ADMIN: LEADS API
 // ============================================
+app.post('/api/leads', async (req, res) => {
+  const { name, phone, email, service, source, message } = req.body;
+  
+  if (!name || !phone) {
+    return res.status(400).json({ success: false, error: 'Name and phone are required' });
+  }
+
+  try {
+    const query = `
+      INSERT INTO leads (name, phone, email, service, source, message, createdAt) 
+      VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+    `;
+    // Note: since this is MySQL, we should use NOW() instead of datetime('now')
+    const mysqlQuery = `
+      INSERT INTO leads (name, phone, email, service, source, message, createdAt) 
+      VALUES (?, ?, ?, ?, ?, ?, NOW())
+    `;
+    await dbRun(mysqlQuery, [name, phone, email || null, service || null, source || 'Website', message || null]);
+    
+    res.json({ success: true, message: 'Lead captured successfully!' });
+  } catch (error) {
+    console.error('Lead submission error:', error);
+    res.status(500).json({ success: false, error: 'Failed to capture lead' });
+  }
+});
+
 app.get('/api/leads', requireAdmin, (req, res) => {
   dbAll(`SELECT * FROM leads ORDER BY createdAt DESC`)
     .then((rows) => res.json({ success: true, leads: rows }))
