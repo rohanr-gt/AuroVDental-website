@@ -195,7 +195,6 @@ initDb().catch(err => {
 // Gallery schema is handled in initial creation for MySQL
 
 // In-memory storage (non-persistent)
-let appointments = [];
 let assessments = [];
 let chatHistory = [];
 
@@ -322,8 +321,23 @@ app.post('/api/appointments', async (req, res) => {
     return res.status(400).json({ success: false, error: 'Missing required fields' });
   }
 
+  const createdAt = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  let appointmentId;
+  try {
+    const result = await dbRun(
+      `INSERT INTO appointments (name, phone, email, date, time, service, issue, status, createdAt)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [name, phone, email || null, date, time, service || null, issue || null, 'pending', createdAt]
+    );
+    appointmentId = result.lastID;
+  } catch (error) {
+    console.error('❌ Appointment insert error:', error);
+    return res.status(500).json({ success: false, error: 'Failed to save appointment' });
+  }
+
   const appointment = {
-    id: appointments.length + 1,
+    id: appointmentId,
     name,
     phone,
     email,
@@ -335,7 +349,6 @@ app.post('/api/appointments', async (req, res) => {
     createdAt: new Date()
   };
 
-  appointments.push(appointment);
   const confirmationNumber = `APT-${Date.now()}`;
 
   // Store as a lead (persistent)
@@ -378,8 +391,14 @@ app.post('/api/appointments', async (req, res) => {
   });
 });
 
-app.get('/api/appointments', (req, res) => {
-  res.json({ success: true, appointments });
+app.get('/api/appointments', async (req, res) => {
+  try {
+    const appointments = await dbAll(`SELECT * FROM appointments ORDER BY createdAt DESC`);
+    res.json({ success: true, appointments });
+  } catch (error) {
+    console.error('Appointments fetch error:', error);
+    res.status(500).json({ success: false, error: 'Failed to fetch appointments' });
+  }
 });
 
 app.get('/api/available-slots', (req, res) => {
@@ -771,12 +790,15 @@ cron.schedule('0 9 * * *', async () => {
   console.log('📧 Running appointment reminder job...');
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
 
-  // Filter appointments for tomorrow
-  const reminders = appointments.filter(apt => apt.date === tomorrow && apt.email);
-  console.log(`💬 Sending ${reminders.length} reminders for tomorrow (${tomorrow})...`);
+  try {
+    const reminders = await dbAll(`SELECT * FROM appointments WHERE date = ? AND email IS NOT NULL AND email != ''`, [tomorrow]);
+    console.log(`💬 Sending ${reminders.length} reminders for tomorrow (${tomorrow})...`);
 
-  for (const apt of reminders) {
-    await sendReminderEmail({ to: apt.email, appointment: apt });
+    for (const apt of reminders) {
+      await sendReminderEmail({ to: apt.email, appointment: apt });
+    }
+  } catch (err) {
+    console.error('❌ Reminder job error:', err);
   }
 });
 

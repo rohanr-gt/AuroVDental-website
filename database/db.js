@@ -66,6 +66,21 @@ export async function initDb() {
         createdAt DATETIME NOT NULL
       )
     `);
+
+    await pool.execute(`
+      CREATE TABLE IF NOT EXISTS appointments (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        phone VARCHAR(50) NOT NULL,
+        email VARCHAR(255),
+        date VARCHAR(50) NOT NULL,
+        time VARCHAR(50) NOT NULL,
+        service VARCHAR(255),
+        issue TEXT,
+        status VARCHAR(50) NOT NULL DEFAULT 'pending',
+        createdAt DATETIME NOT NULL
+      )
+    `);
     console.log('✅ Database Tables Verified');
     return pool;
   } catch (err) {

@@ -35,6 +35,22 @@ export default function Admin() {
   const [leads, setLeads] = useState([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
 
+  // Bookings
+  const [bookings, setBookings] = useState([]);
+  const [bookingsLoading, setBookingsLoading] = useState(false);
+  // Fetch bookings
+  const fetchBookings = async () => {
+    setBookingsLoading(true);
+    try {
+      const res = await axios.get(`${API_BASE}/api/appointments`, { headers });
+      setBookings(res.data?.appointments || []);
+    } catch (e) {
+      setBookings([]);
+    } finally {
+      setBookingsLoading(false);
+    }
+  };
+
   // Gallery
   const [gallery, setGallery] = useState([]);
   const [galleryLoading, setGalleryLoading] = useState(false);
@@ -137,6 +153,7 @@ export default function Admin() {
     if (!token) return;
     fetchLeads();
     fetchGallery();
+    fetchBookings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
@@ -423,9 +440,44 @@ export default function Admin() {
                   <div className="font-bold text-[color:var(--dk)] text-lg">Booking</div>
                   <div className="text-sm text-[color:var(--muted)]">Manage appointment bookings.</div>
                 </div>
+                <button
+                  onClick={fetchBookings}
+                  className="px-4 py-2 rounded-xl font-bold bg-[color:var(--soft)] text-[color:var(--dk)] hover:bg-white border border-black/5 transition"
+                >
+                  Refresh
+                </button>
               </div>
-              <div className="p-6">
-                <p className="text-[color:var(--muted)]">Booking management coming soon...</p>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-sm">
+                  <thead className="bg-[color:var(--soft)] text-[color:var(--dk)]">
+                    <tr>
+                      <th className="text-left px-4 lg:px-6 py-4 font-bold">Name</th>
+                      <th className="text-left px-4 lg:px-6 py-4 font-bold">Phone</th>
+                      <th className="text-left px-4 lg:px-6 py-4 font-bold">Email</th>
+                      <th className="text-left px-4 lg:px-6 py-4 font-bold">Service</th>
+                      <th className="text-left px-4 lg:px-6 py-4 font-bold">Date</th>
+                      <th className="text-left px-4 lg:px-6 py-4 font-bold">Time</th>
+                      <th className="text-left px-4 lg:px-6 py-4 font-bold">Created</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bookingsLoading ? (
+                      <tr><td colSpan={7} className="px-4 py-6 text-center">Loading...</td></tr>
+                    ) : bookings.length === 0 ? (
+                      <tr><td colSpan={7} className="px-4 py-6 text-center text-[color:var(--muted)]">No bookings yet.</td></tr>
+                    ) : bookings.map((b) => (
+                      <tr key={b.id || b._id} className="border-b border-black/5">
+                        <td className="px-4 lg:px-6 py-3">{b.name}</td>
+                        <td className="px-4 lg:px-6 py-3">{b.phone}</td>
+                        <td className="px-4 lg:px-6 py-3">{b.email}</td>
+                        <td className="px-4 lg:px-6 py-3">{b.service}</td>
+                        <td className="px-4 lg:px-6 py-3">{b.date}</td>
+                        <td className="px-4 lg:px-6 py-3">{b.time}</td>
+                        <td className="px-4 lg:px-6 py-3">{formatDate(b.created_at || b.createdAt)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
