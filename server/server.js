@@ -506,6 +506,80 @@ app.delete('/api/admin/gallery/:id', requireAdmin, async (req, res) => {
 });
 
 // ============================================
+// REVIEWS API
+// ============================================
+
+app.post('/api/reviews', async (req, res) => {
+  const { name, email, phone, rating, comment } = req.body;
+  if (!email || !phone || !rating) {
+    return res.status(400).json({ success: false, error: 'Missing required fields' });
+  }
+
+  const createdAt = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  try {
+    await dbRun(
+      `INSERT INTO reviews (name, email, phone, rating, comment, status, createdAt)
+       VALUES (?, ?, ?, ?, ?, 'pending', ?)`,
+      [name || null, email, phone, rating, comment || null, createdAt]
+    );
+    res.json({ success: true, message: 'Review submitted successfully' });
+  } catch (error) {
+    console.error('Review insert error:', error);
+    res.status(500).json({ success: false, error: 'Failed to save review' });
+  }
+});
+
+app.get('/api/reviews', async (req, res) => {
+  try {
+    // Only fetch published reviews for public view
+    const reviews = await dbAll(`SELECT name, rating, comment, createdAt FROM reviews WHERE status = 'published' ORDER BY createdAt DESC`);
+    res.json({ success: true, reviews });
+  } catch (error) {
+    console.error('Reviews fetch error:', error);
+    res.status(500).json({ success: false, error: 'Failed to fetch reviews' });
+  }
+});
+
+// Admin Review Routes
+app.get('/api/admin/reviews', requireAdmin, async (req, res) => {
+  try {
+    const reviews = await dbAll(`SELECT * FROM reviews ORDER BY createdAt DESC`);
+    res.json({ success: true, reviews });
+  } catch (error) {
+    console.error('Admin reviews fetch error:', error);
+    res.status(500).json({ success: false, error: 'Failed to fetch reviews' });
+  }
+});
+
+app.patch('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  if (!status || !['pending', 'published', 'rejected'].includes(status)) {
+    return res.status(400).json({ success: false, error: 'Invalid status' });
+  }
+
+  try {
+    await dbRun(`UPDATE reviews SET status = ? WHERE id = ?`, [status, id]);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Review update error:', error);
+    res.status(500).json({ success: false, error: 'Failed to update review' });
+  }
+});
+
+app.delete('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
+  const { id } = req.params;
+  try {
+    await dbRun(`DELETE FROM reviews WHERE id = ?`, [id]);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Review delete error:', error);
+    res.status(500).json({ success: false, error: 'Failed to delete review' });
+  }
+});
+
+// ============================================
 // STEP 8: CHATBOT API
 // ============================================
 const CLINIC = {

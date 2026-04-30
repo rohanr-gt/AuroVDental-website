@@ -28,22 +28,36 @@ const Home = () => {
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [dynamicReviews, setDynamicReviews] = useState([]);
 
   const location = useLocation();
 
-  useEffect(() => {
-    const fetchOurWork = async () => {
-      try {
-        const res = await axios.get(`${API_BASE}/api/gallery`);
-        if (res.data?.success) {
-          const filtered = res.data.gallery.filter(item => item.category === 'our-work');
-          setOurWorkGallery(filtered);
-        }
-      } catch (err) {
-        console.error('Error fetching our work gallery:', err);
+  const fetchOurWorkGallery = async () => {
+    try {
+      const res = await axios.get(`${API_BASE}/api/gallery`);
+      if (res.data?.success) {
+        const filtered = res.data.gallery.filter(item => item.category === 'our-work');
+        setOurWorkGallery(filtered);
       }
-    };
-    fetchOurWork();
+    } catch (err) {
+      console.error('Error fetching our work gallery:', err);
+    }
+  };
+
+  const fetchDynamicReviews = async () => {
+    try {
+      const res = await axios.get(`${API_BASE}/api/reviews`);
+      if (res.data?.success) {
+        setDynamicReviews(res.data.reviews || []);
+      }
+    } catch (e) {
+      console.error('Failed to load reviews', e);
+    }
+  };
+
+  useEffect(() => {
+    fetchOurWorkGallery();
+    fetchDynamicReviews();
   }, []);
 
   useEffect(() => {
@@ -517,30 +531,40 @@ const Home = () => {
 
         <div className="max-w-7xl mx-auto mt-14 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {[
-            {
+            ...dynamicReviews.map(r => ({
+              q: r.comment,
+              n: r.name || 'Anonymous',
+              l: new Date(r.createdAt).toLocaleDateString(),
               feat: true,
+              rating: r.rating
+            })),
+            {
+              feat: false,
               q: t('home.testimonials.t1'),
               n: 'Sara Al‑Hamdan',
               l: 'Dubai, UAE'
             },
             {
+              feat: false,
               q: t('home.testimonials.t2'),
               n: 'James Mitchell',
               l: 'Manchester, UK'
             },
             {
+              feat: false,
               q: t('home.testimonials.t3'),
               n: 'Anna Petrova',
               l: 'Moscow, Russia'
             },
             {
+              feat: false,
               q: 'Got my implants done — feels just like natural teeth.\nProfessional care and smooth experience from start to finish.\nCompletely changed my confidence and quality of life.',
               n: 'Auro V Dental Patient',
               l: 'Bengaluru, India'
             }
-          ].map((t) => (
+          ].map((t, idx) => (
             <div
-              key={t.n}
+              key={idx}
               className={[
                 'rounded-3xl p-8 border transition',
                 t.feat
@@ -548,7 +572,9 @@ const Home = () => {
                   : 'bg-white border-black/5 text-[color:var(--txt)] hover:shadow-xl hover:shadow-black/5'
               ].join(' ')}
             >
-              <div className={t.feat ? 'text-[#C9A24A]' : 'text-[color:var(--teal)]'}>★★★★★</div>
+              <div className={t.feat ? 'text-[#C9A24A]' : 'text-[color:var(--teal)]'}>
+                {'★'.repeat(t.rating || 5)}{'☆'.repeat(5 - (t.rating || 5))}
+              </div>
               <p className={['mt-4 text-base leading-7 whitespace-pre-wrap', t.feat ? 'text-white/75' : 'text-[color:var(--muted)]'].join(' ')}>
                 {t.q}
               </p>

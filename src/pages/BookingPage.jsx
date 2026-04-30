@@ -19,6 +19,11 @@ const BookingPage = () => {
   const [loading, setLoading] = useState(false);
   const [emailStatus, setEmailStatus] = useState(null);
 
+  // Review State
+  const [reviewData, setReviewData] = useState({ rating: 0, comment: '' });
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const [reviewLoading, setReviewLoading] = useState(false);
+
   useEffect(() => {
     fetchAvailableSlots();
   }, []);
@@ -59,6 +64,28 @@ const BookingPage = () => {
       alert('Error booking appointment. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+    if (reviewData.rating === 0) return;
+    setReviewLoading(true);
+    const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:5000' : '';
+    try {
+      await axios.post(`${API_BASE}/api/reviews`, {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        rating: reviewData.rating,
+        comment: reviewData.comment
+      });
+      setReviewSubmitted(true);
+    } catch (error) {
+      console.error('Review error:', error);
+      alert(t('reviews.error') || 'Error submitting review');
+    } finally {
+      setReviewLoading(false);
     }
   };
 
@@ -141,6 +168,66 @@ const BookingPage = () => {
               >
                 {t('booking.bookAnother')}
               </button>
+            </div>
+
+            {/* Give Review Section */}
+            <div className="mt-8 pt-8 border-t border-green-200 text-left">
+              {reviewSubmitted ? (
+                <div className="bg-white rounded-2xl p-6 text-center shadow-sm">
+                  <div className="text-3xl mb-2">✨</div>
+                  <p className="text-green-800 font-bold">{t('reviews.success')}</p>
+                </div>
+              ) : (
+                <form onSubmit={handleReviewSubmit} className="bg-white rounded-2xl p-6 shadow-sm border border-black/5">
+                  <h3 className="font-serif text-xl font-bold text-[color:var(--dk)] mb-2">{t('reviews.giveReview')}</h3>
+                  <p className="text-sm text-[color:var(--muted)] mb-6">{t('reviews.reviewDesc')}</p>
+                  
+                  <div className="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wide text-[color:var(--muted)] mb-2">Email</label>
+                      <input type="email" value={formData.email} readOnly className="w-full bg-gray-50 border border-black/5 rounded-xl px-4 py-2 text-gray-500" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wide text-[color:var(--muted)] mb-2">Phone</label>
+                      <input type="tel" value={formData.phone} readOnly className="w-full bg-gray-50 border border-black/5 rounded-xl px-4 py-2 text-gray-500" />
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <label className="block text-xs font-bold uppercase tracking-wide text-[color:var(--muted)] mb-2">{t('reviews.rating')}</label>
+                    <div className="flex gap-2 text-3xl">
+                      {[1, 2, 3, 4, 5].map(star => (
+                        <button
+                          type="button"
+                          key={star}
+                          onClick={() => setReviewData(prev => ({ ...prev, rating: star }))}
+                          className={`transition-colors ${reviewData.rating >= star ? 'text-yellow-400' : 'text-gray-200 hover:text-yellow-200'}`}
+                        >
+                          ★
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <label className="block text-xs font-bold uppercase tracking-wide text-[color:var(--muted)] mb-2">{t('reviews.comments')}</label>
+                    <textarea
+                      value={reviewData.comment}
+                      onChange={(e) => setReviewData(prev => ({ ...prev, comment: e.target.value }))}
+                      className="w-full bg-[color:var(--bg)] border border-black/10 rounded-xl px-4 py-3 h-24 resize-none focus:outline-none focus:border-[color:var(--teal)]"
+                      placeholder={t('reviews.writeCommentPlaceholder')}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={reviewLoading || reviewData.rating === 0}
+                    className="bg-[color:var(--dk)] text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-[color:var(--teal)] transition-colors disabled:opacity-50"
+                  >
+                    {reviewLoading ? t('reviews.submitting') : t('reviews.submit')}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         ) : (

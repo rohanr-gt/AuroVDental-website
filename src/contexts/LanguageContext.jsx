@@ -385,6 +385,17 @@ const translations = {
       a10: 'Yes, we provide structured plans for outstation and international patients.',
       q11: 'ADDITIONAL SERVICES?',
       a11: 'We also offer clear aligners and braces for patients looking to straighten their teeth.'
+    },
+    reviews: {
+      giveReview: 'Give Review',
+      reviewDesc: 'We value your feedback. Please share your experience with us.',
+      rating: 'Rating',
+      comments: 'Comments',
+      submit: 'Submit Review',
+      submitting: 'Submitting...',
+      success: 'Thank you! Your review has been submitted.',
+      error: 'Failed to submit review. Please try again.',
+      writeCommentPlaceholder: 'Write your experience here...'
     }
   },
   es: {
@@ -771,6 +782,17 @@ const translations = {
       a10: 'Sí, ofrecemos planes estructurados para pacientes foráneos e internacionales.',
       q11: '¿SERVICIOS ADICIONALES?',
       a11: 'También ofrecemos alineadores transparentes y frenos para pacientes que buscan enderezar sus dientes.'
+    },
+    reviews: {
+      giveReview: 'Dar Reseña',
+      reviewDesc: 'Valoramos tus comentarios. Por favor comparte tu experiencia con nosotros.',
+      rating: 'Calificación',
+      comments: 'Comentarios',
+      submit: 'Enviar Reseña',
+      submitting: 'Enviando...',
+      success: '¡Gracias! Tu reseña ha sido enviada.',
+      error: 'Error al enviar la reseña. Inténtalo de nuevo.',
+      writeCommentPlaceholder: 'Escribe tu experiencia aquí...'
     }
   },
 };

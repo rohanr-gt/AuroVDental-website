@@ -81,6 +81,19 @@ export async function initDb() {
         createdAt DATETIME NOT NULL
       )
     `);
+
+    await pool.execute(`
+      CREATE TABLE IF NOT EXISTS reviews (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255),
+        email VARCHAR(255) NOT NULL,
+        phone VARCHAR(50) NOT NULL,
+        rating INT NOT NULL,
+        comment TEXT,
+        status VARCHAR(50) NOT NULL DEFAULT 'pending',
+        createdAt DATETIME NOT NULL
+      )
+    `);
     console.log('✅ Database Tables Verified');
     return pool;
   } catch (err) {
