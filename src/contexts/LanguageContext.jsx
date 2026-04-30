@@ -396,6 +396,40 @@ const translations = {
       success: 'Thank you! Your review has been submitted.',
       error: 'Failed to submit review. Please try again.',
       writeCommentPlaceholder: 'Write your experience here...'
+    },
+    footer: {
+      tagline: 'International centre of dental excellence delivering world-class smiles since 2007.',
+      treatments: 'Treatments',
+      international: 'International',
+      clinic: 'Clinic',
+      allRights: '© 2026 Auro V Dental. All rights reserved.',
+      privacy: 'Privacy Policy',
+      terms: 'Terms',
+      accessibility: 'Accessibility',
+      links: {
+        smileMakeover: 'Smile Makeover',
+        dentalImplants: 'Dental Implants',
+        cosmeticDentistry: 'Cosmetic Dentistry',
+        invisibleBraces: 'Invisible Braces',
+        laserDentistry: 'Laser Dentistry',
+        fullMouthRehab: 'Full Mouth Rehab',
+        rootCanal: 'Root Canal',
+        teethWhitening: 'Teeth Whitening',
+        dentalTourism: 'Dental Tourism',
+        travelGuide: 'Travel Guide',
+        hotelPartners: 'Hotel Partners',
+        visaSupport: 'Visa Support',
+        virtualConsult: 'Virtual Consult',
+        costEstimator: 'Cost Estimator',
+        patientStories: 'Patient Stories',
+        aboutUs: 'About Auro V Dental',
+        ourDoctors: 'Our Doctors',
+        technology: 'Technology',
+        gallery: 'Gallery',
+        blog: 'Blog',
+        careers: 'Careers',
+        contactUs: 'Contact Us'
+      }
     }
   },
   es: {
@@ -793,6 +827,40 @@ const translations = {
       success: '¡Gracias! Tu reseña ha sido enviada.',
       error: 'Error al enviar la reseña. Inténtalo de nuevo.',
       writeCommentPlaceholder: 'Escribe tu experiencia aquí...'
+    },
+    footer: {
+      tagline: 'Centro internacional de excelencia dental que ofrece sonrisas de clase mundial desde 2007.',
+      treatments: 'Tratamientos',
+      international: 'Internacional',
+      clinic: 'Clínica',
+      allRights: '© 2026 Auro V Dental. Todos los derechos reservados.',
+      privacy: 'Política de Privacidad',
+      terms: 'Términos',
+      accessibility: 'Accesibilidad',
+      links: {
+        smileMakeover: 'Diseño de Sonrisa',
+        dentalImplants: 'Implantes Dentales',
+        cosmeticDentistry: 'Odontología Estética',
+        invisibleBraces: 'Ortodoncia Invisible',
+        laserDentistry: 'Odontología Láser',
+        fullMouthRehab: 'Rehabilitación Oral Completa',
+        rootCanal: 'Endodoncia',
+        teethWhitening: 'Blanqueamiento Dental',
+        dentalTourism: 'Turismo Dental',
+        travelGuide: 'Guía de Viaje',
+        hotelPartners: 'Hoteles Asociados',
+        visaSupport: 'Soporte de Visa',
+        virtualConsult: 'Consulta Virtual',
+        costEstimator: 'Estimador de Costos',
+        patientStories: 'Historias de Pacientes',
+        aboutUs: 'Sobre Auro V Dental',
+        ourDoctors: 'Nuestros Doctores',
+        technology: 'Tecnología',
+        gallery: 'Galería',
+        blog: 'Blog',
+        careers: 'Carreras',
+        contactUs: 'Contáctenos'
+      }
     }
   },
 };
